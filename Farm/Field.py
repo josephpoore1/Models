@@ -1,16 +1,22 @@
+from dataclasses import dataclass
+from Geospatial import Land
+
+@dataclass
 class Field:
-    def __init__(self, land):
-        self._machinery = list()
-        self._infrastructure = list()
+    machinery: list
+    infrastructure: list
+    land: Land
+    lime_amount: float
+    dolomite_amount: float
     
     def addLime(self, amount):
-        self._lime  += amount
+        self.lime_amount  += amount
     
     def addDolomite(self, amount):
-        self._dolomite += amount
+        self.dolomite_amount += amount
     
     def addMachinery(self, machinery):
-        self._machinery.append(machinery)
+        self.machinery.append(machinery)
     
     def addInfrastructure(self, machinery):
-        self._machinery.append(machinery)
+        self.machinery.append(machinery)

@@ -1,15 +1,20 @@
+from dataclasses import dataclass
 from Fertilizing import Fertilizing
-
+from Irrigation import Irrigation
+from PesticideManagement import PesticideManagement
+ 
+@dataclass
 class FarmActivities:
-    def __init__(self):
-        self._fertilizing = None
-    
-    def addFertilizer(self, fertilizer):
-        if self._fertilizing is None:
-            self._fertilizing = Fertilizing()
+    fertilizing: Fertilizing
+    irrigation: Irrigation
+    pests: PesticideManagement
 
-        self._fertilizing.addFertilizer(fertilizer)
+    def addFertilizer(self, fertilizer):
+        if self.fertilizing is None:
+            self.fertilizing = Fertilizing()
+
+        self.fertilizing.addFertilizer(fertilizer)
     
     def addIrrigation(self, irrigation):
-        self._irrigation = irrigation
+        self.irrigation = irrigation
     

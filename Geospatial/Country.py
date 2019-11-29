@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 
 @dataclass
-class Fertilizing:
-    fertilizers: list
-    
+class Country:
+    name: str

@@ -1,6 +1,9 @@
+from dataclasses import dataclass
+from Geospatial import Country
+
+@dataclass
 class Land:
-    
-    def __init__(self, country, area, gps, soil, weather):
-       pass
-    
+    country: Country
+    total_area: float
+
 

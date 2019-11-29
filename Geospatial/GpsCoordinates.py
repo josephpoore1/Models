@@ -1,6 +1,7 @@
-class GpsCoordinates:
+from dataclasses import dataclass
 
-    def __init__(self, latitude, longitude):
-        self._latitude = latitude
-        self._longitude = longitude
+@dataclass
+class GpsCoordinates:
+    latitude: float
+    longitude: float
     

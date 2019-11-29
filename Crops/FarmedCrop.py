@@ -1,14 +1,19 @@
+from dataclasses import dataclass
+from datetime import timedelta
 from Activities import FarmActivities
+from Crops import Crop
+from Farm import Farm, LandUseManagemet
 
+@dataclass
 class FarmedCrop:
+    crop: Crop
+    farm: Farm
+    farming_period: timedelta
+    seed_amount: float
+    crop_yield_amount: float
+    _farm_activities : FarmActivities
+    _land_use: LandUseManagemet
 
-    def __init__(self, crop, field, farming_period, seed, crop_yield):
-        self._crop = crop
-        self._field = field
-        self._farming_period = farming_period
-        self._seed = seed
-        self._crop_yield = crop_yield
-        self._farm_activities = FarmActivities.FarmActivities()
 
     def addFertilizer(self, fertilizer):
         self._farm_activities.addFertilizer(fertilizer)

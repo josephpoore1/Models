@@ -1,6 +1,8 @@
-class Fertilizer: 
+from dataclasses import dataclass
 
-    def __init__(self, amount, name, fertilizer_type):
-        self._amount = amount
-        self._name = name
-        self._type = fertilizer_type
+@dataclass
+class Fertilizer: 
+    name: str
+    amount: float
+    fertilizer_type: str
+    
