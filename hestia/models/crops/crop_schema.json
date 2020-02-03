@@ -1,0 +1,53 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/mondra/farm/crop/schema#",
+    "$id": "http://example.com/root.json",
+    "type": "object",
+    "title": "The JSON Shema for crop",
+    "required": [
+      "Characteristic"
+    ],
+    "properties": {
+        "Characteristic": {
+          "$id": "#/properties/Crop/properties/Characteristic",
+          "type": "object",
+          "title": "The Characteristic Schema",
+          "required": [
+            "Name",
+            "RootDepth"
+          ],
+          "properties": {
+            "Name": {
+              "$id": "#/properties/Crop/properties/Characteristic/properties/Name",
+              "type": "string",
+              "title": "The Name Schema",
+              "default": "",
+              "examples": [
+                "Soybeans"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "RootDepth": {
+              "$id": "#/properties/Crop/properties/Characteristic/properties/RootDepth",
+              "type": "number",
+              "title": "The Rootdepth Schema",
+              "default": 0.0,
+              "examples": [
+                0.6
+              ]
+            }
+          }
+        },
+        "Composition": {
+          "$id": "#/properties/Crop/properties/Composition",
+          "type": "object",
+          "title": "The Composition Schema",
+          "default": { }
+        },
+        "Productivity": {
+          "$id": "#/properties/Crop/properties/Productivity",
+          "type": "object",
+          "title": "The Productivity Schema"
+        }
+      }
+}

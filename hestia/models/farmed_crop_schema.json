@@ -1,0 +1,1195 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/mondra/farm/crop/schema#",
+    "$id": "http://example.com/root.json",
+    "type": "object",
+    "title": "The JSON Shema for farmed crop",
+    "required": [
+      "Seed",
+      "Yield",
+      "Crop",
+      "Field",
+      "Activities"
+    ],
+    "properties": {
+      "Seed": {
+        "$id": "#/properties/Seed",
+        "type": "number",
+        "title": "The Seed Schema",
+        "default": 0.0,
+        "examples": [
+          67.5
+        ]
+      },
+      "Yield": {
+        "$id": "#/properties/Yield",
+        "type": "object",
+        "title": "The Yield Schema",
+        "required": [
+          "DM",
+          "MKT"
+        ],
+        "properties": {
+          "DM": {
+            "$id": "#/properties/Yield/properties/DM",
+            "type": "number",
+            "title": "The Dm Schema",
+            "default": 0.0,
+            "examples": [
+              1696.6
+            ]
+          },
+          "MKT": {
+            "$id": "#/properties/Yield/properties/MKT",
+            "type": "number",
+            "title": "Marketable amount of yield",
+            "default": 0,
+            "examples": [
+              1996
+            ]
+          }
+        }
+      },
+      "Crop": {
+        "$id": "#/properties/Crop",
+        "type": "object",
+        "title": "The Crop Schema",
+        "required": [
+          "Characteristic"
+        ],
+        "properties": {
+          "Characteristic": {
+            "$id": "#/properties/Crop/properties/Characteristic",
+            "type": "object",
+            "title": "The Characteristic Schema",
+            "required": [
+              "Name",
+              "RootDepth"
+            ],
+            "properties": {
+              "Name": {
+                "$id": "#/properties/Crop/properties/Characteristic/properties/Name",
+                "type": "string",
+                "title": "The Name Schema",
+                "default": "",
+                "examples": [
+                  "Soybeans"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "RootDepth": {
+                "$id": "#/properties/Crop/properties/Characteristic/properties/RootDepth",
+                "type": "number",
+                "title": "The Rootdepth Schema",
+                "default": 0.0,
+                "examples": [
+                  0.6
+                ]
+              }
+            }
+          },
+          "Composition": {
+            "$id": "#/properties/Crop/properties/Composition",
+            "type": "object",
+            "title": "The Composition Schema",
+            "default": { }
+          },
+          "Productivity": {
+            "$id": "#/properties/Crop/properties/Productivity",
+            "type": "object",
+            "title": "The Productivity Schema"
+          }
+        }
+      },
+      "IPCCAnimal": {
+        "$id": "#/properties/IPCCAnimal",
+        "type": "string",
+        "title": "The Ipccanimal Schema",
+        "default": "",
+        "examples": [
+          "string"
+        ],
+        "pattern": "^(.*)$"
+      },
+      "Field": {
+        "$id": "#/properties/Field",
+        "type": "object",
+        "title": "The Field Schema",
+        "required": [
+          "Land"
+        ],
+        "properties": {
+          "Land": {
+            "$id": "#/properties/Field/properties/Land",
+            "type": "object",
+            "title": "The Land Schema",
+            "required": [
+              "Area",
+              "Sp",
+              "Country",
+              "Latitude",
+              "Longitude",
+              "Slope",
+              "SlopeLength",
+              "Soil",
+              "Weather"
+            ],
+            "properties": {
+              "Area": {
+                "$id": "#/properties/Field/properties/Land/properties/Area",
+                "type": "integer",
+                "title": "The Area Schema",
+                "default": 0,
+                "examples": [
+                  0
+                ]
+              },
+              "Sp": {
+                "$id": "#/properties/Field/properties/Land/properties/Sp",
+                "type": "string",
+                "title": "The Sp Schema",
+                "default": "",
+                "examples": [
+                  "C1"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "Country": {
+                "$id": "#/properties/Field/properties/Land/properties/Country",
+                "type": "string",
+                "title": "The Country Schema",
+                "default": "",
+                "examples": [
+                  "France"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "GeographySpecific": {
+                "$id": "#/properties/Field/properties/Land/properties/GeographySpecific",
+                "type": "string",
+                "title": "The Geography Specific Schema",
+                "default": "",
+                "examples": [
+                  "string"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "Latitude": {
+                "$id": "#/properties/Field/properties/Land/properties/Latitude",
+                "type": "string",
+                "title": "The Latitude Schema",
+                "default": "",
+                "examples": [
+                  "45.223179"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "Longitude": {
+                "$id": "#/properties/Field/properties/Land/properties/Longitude",
+                "type": "string",
+                "title": "The Longitude Schema",
+                "default": "",
+                "examples": [
+                  "2.71654"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "Slope": {
+                "$id": "#/properties/Field/properties/Land/properties/Slope",
+                "type": "number",
+                "title": "The Slope Schema",
+                "default": 0.0,
+                "examples": [
+                  0.0359724492639887
+                ]
+              },
+              "SlopeLength": {
+                "$id": "#/properties/Field/properties/Land/properties/SlopeLength",
+                "type": "number",
+                "title": "The Slopelength Schema",
+                "default": 0.0,
+                "examples": [
+                  0.762758215881621
+                ]
+              },
+              "Soil": {
+                "$id": "#/properties/Field/properties/Land/properties/Soil",
+                "type": "object",
+                "title": "The Soil Schema",
+                "required": [
+                  "PhH2O",
+                  "Clay",
+                  "Sand",
+                  "Nitrogen",
+                  "Phosphorus",
+                  "OrganicCarbon",
+                  "DrainageClass",
+                  "LossToAquatics",
+                  "Erodibility"
+                ],
+                "properties": {
+                  "PhH2O": {
+                    "$id": "#/properties/Field/properties/Land/properties/Soil/properties/PhH2O",
+                    "type": "number",
+                    "title": "The Phh2o Schema",
+                    "default": 0.0,
+                    "examples": [
+                      6.34948564697713
+                    ]
+                  },
+                  "Clay": {
+                    "$id": "#/properties/Field/properties/Land/properties/Soil/properties/Clay",
+                    "type": "number",
+                    "title": "The Clay Schema",
+                    "default": 0.0,
+                    "examples": [
+                      0.217935044679069
+                    ]
+                  },
+                  "Sand": {
+                    "$id": "#/properties/Field/properties/Land/properties/Soil/properties/Sand",
+                    "type": "number",
+                    "title": "The Sand Schema",
+                    "default": 0.0,
+                    "examples": [
+                      0.445530816722808
+                    ]
+                  },
+                  "Nitrogen": {
+                    "$id": "#/properties/Field/properties/Land/properties/Soil/properties/Nitrogen",
+                    "type": "number",
+                    "title": "The Nitrogen Schema",
+                    "default": 0.0,
+                    "examples": [
+                      0.0126368989626372
+                    ]
+                  },
+                  "Phosphorus": {
+                    "$id": "#/properties/Field/properties/Land/properties/Soil/properties/Phosphorus",
+                    "type": "number",
+                    "title": "The Phosphorus Schema",
+                    "default": 0.0,
+                    "examples": [
+                      0.460235742132266
+                    ]
+                  },
+                  "OrganicCarbon": {
+                    "$id": "#/properties/Field/properties/Land/properties/Soil/properties/OrganicCarbon",
+                    "type": "number",
+                    "title": "The Organic Carbon Schema",
+                    "default": 0.0,
+                    "examples": [
+                      0.0129793670674146
+                    ]
+                  },
+                  "DrainageClass": {
+                    "$id": "#/properties/Field/properties/Land/properties/Soil/properties/DrainageClass",
+                    "type": "number",
+                    "title": "The Drainage Class Schema",
+                    "default": 0.0,
+                    "examples": [
+                      2.14548810278091
+                    ]
+                  },
+                  "LossToAquatics": {
+                    "$id": "#/properties/Field/properties/Land/properties/Soil/properties/LossToAquatics",
+                    "type": "number",
+                    "title": "The Loss To Aquatics Schema",
+                    "default": 0.0,
+                    "examples": [
+                      0.174139678904055
+                    ]
+                  },
+                  "Erodibility": {
+                    "$id": "#/properties/Field/properties/Land/properties/Soil/properties/Erodibility",
+                    "type": "number",
+                    "title": "The Erodibility Schema",
+                    "default": 0.0,
+                    "examples": [
+                      0.0328432479940378
+                    ]
+                  }
+                }
+              },
+              "Weather": {
+                "$id": "#/properties/Field/properties/Land/properties/Weather",
+                "type": "object",
+                "title": "The Weather Schema",
+                "required": [
+                  "Precipitation",
+                  "Temperature",
+                  "WinterTypeCorrection",
+                  "EcoClimZone"
+                ],
+                "properties": {
+                  "Precipitation": {
+                    "$id": "#/properties/Field/properties/Land/properties/Weather/properties/Precipitation",
+                    "type": "number",
+                    "title": "The Precipitation Schema",
+                    "default": 0.0,
+                    "examples": [
+                      870.06944139919
+                    ]
+                  },
+                  "Temperature": {
+                    "$id": "#/properties/Field/properties/Land/properties/Weather/properties/Temperature",
+                    "type": "number",
+                    "title": "The Temperature Schema",
+                    "default": 0.0,
+                    "examples": [
+                      10.9196452639063
+                    ]
+                  },
+                  "WinterTypeCorrection": {
+                    "$id": "#/properties/Field/properties/Land/properties/Weather/properties/WinterTypeCorrection",
+                    "type": "integer",
+                    "title": "The Wintertypecorrection Schema",
+                    "default": 0,
+                    "examples": [
+                      1
+                    ]
+                  },
+                  "PET": {
+                    "$id": "#/properties/Field/properties/Land/properties/Weather/properties/PET",
+                    "type": "number",
+                    "title": "The Pet Schema",
+                    "default": 0.0,
+                    "examples": [
+                      2.3
+                    ]
+                  },
+                  "EcoClimZone": {
+                    "$id": "#/properties/Field/properties/Land/properties/Weather/properties/EcoClimZone",
+                    "type": "object",
+                    "title": "The Ecoclimzone Schema",
+                    "required": [
+                      "Value"
+                    ],
+                    "properties": {
+                      "Name": {
+                        "$id": "#/properties/Field/properties/Land/properties/Weather/properties/EcoClimZone/properties/Name",
+                        "type": "string",
+                        "title": "The Name Schema",
+                        "default": "",
+                        "examples": [
+                          "string"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "Value": {
+                        "$id": "#/properties/Field/properties/Land/properties/Weather/properties/EcoClimZone/properties/Value",
+                        "type": "integer",
+                        "title": "The Value Schema",
+                        "default": 0,
+                        "examples": [
+                          1
+                        ]
+                      },
+                      "Class": {
+                        "$id": "#/properties/Field/properties/Land/properties/Weather/properties/EcoClimZone/properties/Class",
+                        "type": "string",
+                        "title": "The Class Schema",
+                        "default": "",
+                        "examples": [
+                          "string"
+                        ],
+                        "pattern": "^(.*)$"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Activities": {
+        "$id": "#/properties/Activities",
+        "type": "object",
+        "title": "The Activities Schema",
+        "required": [
+          "Irrigation",
+          "Fertilizers",
+          "Pesticides",
+          "ResidueManagement"
+        ],
+        "properties": {
+          "Irrigation": {
+            "$id": "#/properties/Activities/properties/Irrigation",
+            "type": "object",
+            "title": "The Irrigation Schema",
+            "required": [
+              "Type",
+              "AmountApplied",
+              "EnergyUse"
+            ],
+            "properties": {
+              "Type": {
+                "$id": "#/properties/Activities/properties/Irrigation/properties/Type",
+                "type": "string",
+                "title": "The Type Schema",
+                "default": "",
+                "examples": [
+                  "Sprinkler"
+                ],
+                "pattern": "^(.*)$"
+              },
+              "AmountApplied": {
+                "$id": "#/properties/Activities/properties/Irrigation/properties/AmountApplied",
+                "type": "integer",
+                "title": "The Amount Applied Schema",
+                "default": 0,
+                "examples": [
+                  1750
+                ]
+              },
+              "EnergyUse": {
+                "$id": "#/properties/Activities/properties/Irrigation/properties/EnergyUse",
+                "type": "object",
+                "title": "The Energyuse Schema",
+                "required": [
+                ],
+                "properties": {
+                  "Fuel": {
+                    "$id": "#/properties/Activities/properties/Irrigation/properties/EnergyUse/properties/Fuel",
+                    "type": "number",
+                    "title": "The Fuel Schema",
+                    "default": 0,
+                    "examples": [
+                      0
+                    ]
+                  },
+                  "Electricity": {
+                    "$id": "#/properties/Activities/properties/Irrigation/properties/EnergyUse/properties/Electricity",
+                    "type": "number",
+                    "title": "The Electricity Schema",
+                    "default": 0.0,
+                    "examples": [
+                      265.25
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "Fertilizers": {
+            "$id": "#/properties/Activities/properties/Fertilizers",
+            "type": "object",
+            "title": "The Fertilizers Schema",
+            "required": [
+  
+            ],
+            "properties": {
+              "Organic": {
+                "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic",
+                "type": "object",
+                "title": "The Organic Schema",
+                "required": [
+                ],
+                "properties": {
+                  "Nitrogen": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/Nitrogen",
+                    "type": "integer",
+                    "title": "The Nitrogen Schema",
+                    "default": 0,
+                    "examples": [
+                      0
+                    ]
+                  },
+                  "TotalAmmonicalNitorgen": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/TotalAmmonicalNitorgen",
+                    "type": "integer",
+                    "title": "The Totalammonicalnitorgen Schema",
+                    "default": 0,
+                    "examples": [
+                      100
+                    ]
+                  },
+                  "Phosphorus": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/Phosphorus",
+                    "type": "integer",
+                    "title": "The Phosphorus Schema",
+                    "default": 0,
+                    "examples": [
+                      0
+                    ]
+                  },
+                  "Pottasium": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/Pottasium",
+                    "type": "number",
+                    "title": "The Pottasium Schema",
+                    "default": 0.0,
+                    "examples": [
+                      27.5
+                    ]
+                  },
+                  "NComposition": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/NComposition",
+                    "type": "object",
+                    "title": "The Ncomposition Schema",
+                    "properties": {
+                      "LiquidOrSlurry": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/NComposition/properties/LiquidOrSlurry",
+                        "type": "integer",
+                        "title": "The Liquidorslurry Schema",
+                        "default": 0,
+                        "examples": [
+                          0
+                        ]
+                      },
+                      "Solid": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/NComposition/properties/Solid",
+                        "type": "integer",
+                        "title": "The Solid Schema",
+                        "default": 0,
+                        "examples": [
+                          0
+                        ]
+                      },
+                      "Compost": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/NComposition/properties/Compost",
+                        "type": "integer",
+                        "title": "The Compost Schema",
+                        "default": 0,
+                        "examples": [
+                          0
+                        ]
+                      },
+                      "GreenManure": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/NComposition/properties/GreenManure",
+                        "type": "integer",
+                        "title": "The Greenmanure Schema",
+                        "default": 0,
+                        "examples": [
+                          0
+                        ]
+                      }
+                    }
+                  },
+                  "TANComposition": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/TANComposition",
+                    "type": "object",
+                    "title": "The Tancomposition Schema",
+                    "properties": {
+                      "LiquidOrSlurry": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/TANComposition/properties/LiquidOrSlurry",
+                        "type": "integer",
+                        "title": "The Liquidorslurry Schema",
+                        "default": 0,
+                        "examples": [
+                          0
+                        ]
+                      },
+                      "Solid": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/TANComposition/properties/Solid",
+                        "type": "integer",
+                        "title": "The Solid Schema",
+                        "default": 0,
+                        "examples": [
+                          1
+                        ]
+                      },
+                      "Compost": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/TANComposition/properties/Compost",
+                        "type": "integer",
+                        "title": "The Compost Schema",
+                        "default": 0,
+                        "examples": [
+                          0
+                        ]
+                      },
+                      "GreenManure": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Organic/properties/TANComposition/properties/GreenManure",
+                        "type": "integer",
+                        "title": "The Greenmanure Schema",
+                        "default": 0,
+                        "examples": [
+                          0
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "Synthetic": {
+                "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic",
+                "type": "object",
+                "title": "The Synthetic Schema",
+                "properties": {
+                  "Nitrogen": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Nitrogen",
+                    "type": "integer",
+                    "title": "The Nitrogen Schema",
+                    "default": 0,
+                    "examples": [
+                      29
+                    ]
+                  },
+                  "Phosphorus": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Phosphorus",
+                    "type": "integer",
+                    "title": "The Phosphorus Schema",
+                    "default": 0,
+                    "examples": [
+                      0
+                    ]
+                  },
+                  "Pottasium": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Pottasium",
+                    "type": "integer",
+                    "title": "The Pottasium Schema",
+                    "default": 0,
+                    "examples": [
+                      0
+                    ]
+                  },
+                  "Composition": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Composition",
+                    "type": "object",
+                    "title": "The Composition Schema",
+                    "properties": {
+                      "Urea_UAS": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Composition/properties/Urea_UAS",
+                        "type": "number",
+                        "title": "The Urea_uas Schema",
+                        "default": 0.0,
+                        "examples": [
+                          2.2
+                        ]
+                      },
+                      "AS": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Composition/properties/AS",
+                        "type": "number",
+                        "title": "The As Schema",
+                        "default": 0.0,
+                        "examples": [
+                          1.1
+                        ]
+                      },
+                      "UAN_Solu": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Composition/properties/UAN_Solu",
+                        "type": "number",
+                        "title": "The Uan_solu Schema",
+                        "default": 0.0,
+                        "examples": [
+                          2.2
+                        ]
+                      },
+                      "AN_ACl_NP_KN_NPK": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Composition/properties/AN_ACl_NP_KN_NPK",
+                        "type": "number",
+                        "title": "The An_acl_np_kn_npk Schema",
+                        "default": 0.0,
+                        "examples": [
+                          2.2
+                        ]
+                      },
+                      "CAN": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Composition/properties/CAN",
+                        "type": "number",
+                        "title": "The Can Schema",
+                        "default": 0.0,
+                        "examples": [
+                          4.3
+                        ]
+                      },
+                      "AnhA_AquaA": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Composition/properties/AnhA_AquaA",
+                        "type": "number",
+                        "title": "The Anha_aquaa Schema",
+                        "default": 0.0,
+                        "examples": [
+                          4.5
+                        ]
+                      },
+                      "AP_DAP_MAP": {
+                        "$id": "#/properties/Activities/properties/Fertilizers/properties/Synthetic/properties/Composition/properties/AP_DAP_MAP",
+                        "type": "number",
+                        "title": "The Ap_dap_map Schema",
+                        "default": 0.0,
+                        "examples": [
+                          2.2
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "Excreta": {
+                "$id": "#/properties/Activities/properties/Fertilizers/properties/Excreta",
+                "type": "object",
+                "title": "The Excreta Schema",
+                "properties": {
+                  "Nitrogen": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Excreta/properties/Nitrogen",
+                    "type": "integer",
+                    "title": "The Nitrogen Schema",
+                    "default": 0,
+                    "examples": [
+                      0
+                    ]
+                  },
+                  "TotalAmmonicalNitrogen": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Excreta/properties/TotalAmmonicalNitrogen",
+                    "type": "integer",
+                    "title": "The Totalammonicalnitrogen Schema",
+                    "default": 0,
+                    "examples": [
+                      0
+                    ]
+                  },
+                  "Phosphorus": {
+                    "$id": "#/properties/Activities/properties/Fertilizers/properties/Excreta/properties/Phosphorus",
+                    "type": "integer",
+                    "title": "The Phosphorus Schema",
+                    "default": 0,
+                    "examples": [
+                      0
+                    ]
+                  }
+                }
+              },
+              "Lime": {
+                "$id": "#/properties/Activities/properties/Fertilizers/properties/Lime",
+                "type": "integer",
+                "title": "The Lime Schema",
+                "default": 0,
+                "examples": [
+                  0
+                ]
+              },
+              "Dolomite": {
+                "$id": "#/properties/Activities/properties/Fertilizers/properties/Dolomite",
+                "type": "integer",
+                "title": "The Dolomite Schema",
+                "default": 0,
+                "examples": [
+                  0
+                ]
+              }
+            }
+          },
+          "Pesticides": {
+            "$id": "#/properties/Activities/properties/Pesticides",
+            "type": "object",
+            "title": "The Pesticides Schema",
+            "required": [
+              "Amount",
+              "Pest1"
+            ],
+            "properties": {
+              "Amount": {
+                "$id": "#/properties/Activities/properties/Pesticides/properties/Amount",
+                "type": "integer",
+                "title": "The Amount Schema",
+                "default": 0,
+                "examples": [
+                  0
+                ]
+              },
+              "Pest1": {
+                "$id": "#/properties/Activities/properties/Pesticides/properties/Pest1",
+                "type": "object",
+                "title": "The Pest1 Schema",
+                "required": [
+                  "Name",
+                  "Percentage"
+                ],
+                "properties": {
+                  "Name": {
+                    "$id": "#/properties/Activities/properties/Pesticides/properties/Pest1/properties/Name",
+                    "type": "string",
+                    "title": "The Name Schema",
+                    "default": "",
+                    "examples": [
+                      "-"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "Percentage": {
+                    "$id": "#/properties/Activities/properties/Pesticides/properties/Pest1/properties/Percentage",
+                    "type": "null",
+                    "title": "The Percentage Schema",
+                    "default": null,
+                    "examples": [
+                      null
+                    ]
+                  }
+                }
+              },
+              "Pest2": {
+                "$id": "#/properties/Activities/properties/Pesticides/properties/Pest2",
+                "type": "object",
+                "title": "The Pest2 Schema",
+                "required": [
+                  "Name",
+                  "Percentage"
+                ],
+                "properties": {
+                  "Name": {
+                    "$id": "#/properties/Activities/properties/Pesticides/properties/Pest2/properties/Name",
+                    "type": "string",
+                    "title": "The Name Schema",
+                    "default": "",
+                    "examples": [
+                      "-"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "Percentage": {
+                    "$id": "#/properties/Activities/properties/Pesticides/properties/Pest2/properties/Percentage",
+                    "type": "null",
+                    "title": "The Percentage Schema",
+                    "default": null,
+                    "examples": [
+                      null
+                    ]
+                  }
+                }
+              },
+              "Pest3": {
+                "$id": "#/properties/Activities/properties/Pesticides/properties/Pest3",
+                "type": "object",
+                "title": "The Pest3 Schema",
+                "required": [
+                  "Name",
+                  "Percentage"
+                ],
+                "properties": {
+                  "Name": {
+                    "$id": "#/properties/Activities/properties/Pesticides/properties/Pest3/properties/Name",
+                    "type": "string",
+                    "title": "The Name Schema",
+                    "default": "",
+                    "examples": [
+                      "-"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "Percentage": {
+                    "$id": "#/properties/Activities/properties/Pesticides/properties/Pest3/properties/Percentage",
+                    "type": "null",
+                    "title": "The Percentage Schema",
+                    "default": null,
+                    "examples": [
+                      null
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "ResidueManagement": {
+            "$id": "#/properties/Activities/properties/ResidueManagement",
+            "type": "object",
+            "title": "The Residuemanagement Schema",
+            "required": [
+              "Residue",
+              "Type"
+            ],
+            "properties": {
+              "Residue": {
+                "$id": "#/properties/Activities/properties/ResidueManagement/properties/Residue",
+                "type": "object",
+                "title": "The Residue Schema",
+                "required": [
+                  "Removed",
+                  "Burnt",
+                  "BurntDM",
+                  "AboveGround",
+                  "BelowGround",
+                  "Amount"
+                ],
+                "properties": {
+                  "Removed": {
+                    "$id": "#/properties/Activities/properties/ResidueManagement/properties/Residue/properties/Removed",
+                    "type": "integer",
+                    "title": "The Removed Schema",
+                    "default": 0,
+                    "examples": [
+                      0
+                    ]
+                  },
+                  "Burnt": {
+                    "$id": "#/properties/Activities/properties/ResidueManagement/properties/Residue/properties/Burnt",
+                    "type": "number",
+                    "title": "The Burnt Schema",
+                    "default": 0.0,
+                    "examples": [
+                      0.024
+                    ]
+                  },
+                  "BurntDM": {
+                    "$id": "#/properties/Activities/properties/ResidueManagement/properties/Residue/properties/BurntDM",
+                    "type": "number",
+                    "title": "The Burntdm Schema",
+                    "default": 0.0,
+                    "examples": [
+                      70.268112
+                    ]
+                  },
+                  "AboveGround": {
+                    "$id": "#/properties/Activities/properties/ResidueManagement/properties/Residue/properties/AboveGround",
+                    "type": "number",
+                    "title": "The Aboveground Schema",
+                    "default": 0.0,
+                    "examples": [
+                      2857.569888
+                    ]
+                  },
+                  "BelowGround": {
+                    "$id": "#/properties/Activities/properties/ResidueManagement/properties/Residue/properties/BelowGround",
+                    "type": "number",
+                    "title": "The Belowground Schema",
+                    "default": 0.0,
+                    "examples": [
+                      878.64322
+                    ]
+                  },
+                  "Amount": {
+                    "$id": "#/properties/Activities/properties/ResidueManagement/properties/Residue/properties/Amount",
+                    "type": "number",
+                    "title": "The Amount Schema",
+                    "default": 0.0,
+                    "examples": [
+                      29.889704864
+                    ]
+                  }
+                }
+              },
+              "Type": {
+                "$id": "#/properties/Activities/properties/ResidueManagement/properties/Type",
+                "type": "string",
+                "title": "The Type Schema",
+                "default": "",
+                "examples": [
+                  "Full Tillage"
+                ],
+                "pattern": "^(.*)$"
+              }
+            }
+          },
+          "LandManagement": {
+            "$id": "#/properties/Activities/properties/LandManagement",
+            "type": "object",
+            "title": "The Landmanagement Schema",
+            "required": [
+              "CultivationDuration",
+              "FallowAllocation"
+            ],
+            "properties": {
+              "CultivationDuration": {
+                "$id": "#/properties/Activities/properties/LandManagement/properties/CultivationDuration",
+                "type": "integer",
+                "title": "The Cultivationduration Schema",
+                "default": 0,
+                "examples": [
+                  1
+                ]
+              },
+              "CroppingAllocation": {
+                "$id": "#/properties/Activities/properties/LandManagement/properties/CroppingAllocation",
+                "type": "number",
+                "title": "The Croppingallocation Schema",
+                "default": 0.0,
+                "examples": [
+                  0.1
+                ]
+              },
+              "FallowAllocation": {
+                "$id": "#/properties/Activities/properties/LandManagement/properties/FallowAllocation",
+                "type": "number",
+                "title": "The Fallowallocation Schema",
+                "default": 0.0,
+                "examples": [
+                  1.102
+                ]
+              }
+            }
+          },
+          "Processing": {
+            "$id": "#/properties/Activities/properties/Processing",
+            "type": "object",
+            "title": "The Processing Schema",
+            "required": [
+              "EnergyUse"
+            ],
+            "properties": {
+              "EnergyUse": {
+                "$id": "#/properties/Activities/properties/Processing/properties/EnergyUse",
+                "type": "object",
+                "title": "The Energyuse Schema",
+                "required": [
+                ],
+                "properties": {
+                  "Fuel": {
+                    "$id": "#/properties/Activities/properties/Processing/properties/EnergyUse/properties/Fuel",
+                    "type": "integer",
+                    "title": "The Fuel Schema",
+                    "default": 0,
+                    "examples": [
+                      0
+                    ]
+                  },
+                  "Electricity": {
+                    "$id": "#/properties/Activities/properties/Processing/properties/EnergyUse/properties/Electricity",
+                    "type": "number",
+                    "title": "The Electricity Schema",
+                    "default": 0.0,
+                    "examples": [
+                      265.25
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Infrastructure": {
+        "$id": "#/properties/Infrastructure",
+        "type": "object",
+        "title": "The Infrastructure Schema",
+        "required": [
+        ],
+        "properties": {
+          "GlassAndPerlite": {
+            "$id": "#/properties/Infrastructure/properties/GlassAndPerlite",
+            "type": "number",
+            "title": "The Glassandperlite Schema",
+            "default": 0.0,
+            "examples": [
+              23.4
+            ]
+          },
+          "Plastic": {
+            "$id": "#/properties/Infrastructure/properties/Plastic",
+            "type": "number",
+            "title": "The Plastic Schema",
+            "default": 0.0,
+            "examples": [
+              23.4
+            ]
+          },
+          "RockWool": {
+            "$id": "#/properties/Infrastructure/properties/RockWool",
+            "type": "number",
+            "title": "The Rockwool Schema",
+            "default": 0.0,
+            "examples": [
+              23.4
+            ]
+          },
+          "Steel": {
+            "$id": "#/properties/Infrastructure/properties/Steel",
+            "type": "number",
+            "title": "The Steel Schema",
+            "default": 0.0,
+            "examples": [
+              23.4
+            ]
+          },
+          "Alumminium": {
+            "$id": "#/properties/Infrastructure/properties/Alumminium",
+            "type": "number",
+            "title": "The Alumminium Schema",
+            "default": 0.0,
+            "examples": [
+              23.4
+            ]
+          },
+          "Iron": {
+            "$id": "#/properties/Infrastructure/properties/Iron",
+            "type": "number",
+            "title": "The Iron Schema",
+            "default": 0.0,
+            "examples": [
+              23.4
+            ]
+          },
+          "Concrete": {
+            "$id": "#/properties/Infrastructure/properties/Concrete",
+            "type": "number",
+            "title": "The Concrete Schema",
+            "default": 0.0,
+            "examples": [
+              23.4
+            ]
+          },
+          "Wood": {
+            "$id": "#/properties/Infrastructure/properties/Wood",
+            "type": "number",
+            "title": "The Wood Schema",
+            "default": 0.0,
+            "examples": [
+              23.4
+            ]
+          }
+        }
+      },
+      "Machinery": {
+        "$id": "#/properties/Machinery",
+        "type": "object",
+        "title": "The Machinery Schema",
+        "required": [
+          "Amount"
+        ],
+        "properties": {
+          "Energy": {
+            "$id": "#/properties/Machinery/properties/Energy",
+            "type": "object",
+            "title": "The Energy Schema",
+            "required": [
+            ],
+            "properties": {
+              "Fuel": {
+                "$id": "#/properties/Machinery/properties/Energy/properties/Fuel",
+                "type": "number",
+                "title": "The Fuel Schema",
+                "default": 0.0,
+                "examples": [
+                  86.0981308411215
+                ]
+              },
+              "Electricity": {
+                "$id": "#/properties/Machinery/properties/Energy/properties/Electricity",
+                "type": "number",
+                "title": "The Electricity Schema",
+                "default": 0.0,
+                "examples": [
+                  23.4
+                ]
+              }
+            }
+          },
+          "Amount": {
+            "$id": "#/properties/Machinery/properties/Amount",
+            "type": "number",
+            "title": "The Amount Schema",
+            "default": 0.0,
+            "examples": [
+              7.5
+            ]
+          },
+          "Hours": {
+            "$id": "#/properties/Machinery/properties/Hours",
+            "type": "number",
+            "title": "The Hours Schema",
+            "default": 0.0,
+            "examples": [
+              23.4
+            ]
+          },
+          "Plastic": {
+            "$id": "#/properties/Machinery/properties/Plastic",
+            "type": "integer",
+            "title": "The Plastic Schema",
+            "default": 0,
+            "examples": [
+              0
+            ]
+          }
+        }
+      }
+    }
+  }
