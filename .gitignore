@@ -1,3 +1,6 @@
 data_client/data_loaders/__pycache__/json_loader.cpython-37.pyc
 data_client/__pycache__/data_client.cpython-37.pyc
 hestia/lookups/name_mappings/__pycache__/crop_residue_mappings.cpython-37.pyc
+hestia/data_client/file_loaders/__pycache__/json_loader.cpython-37.pyc
+.vscode/.ropeproject/objectdb
+.vscode/.ropeproject/config.py
