@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from Fertilizers.Fertilizer import Fertilizer
+from ..fertilizer import Fertilizer
 
 @dataclass
 class SyntheticFertilizer(Fertilizer):

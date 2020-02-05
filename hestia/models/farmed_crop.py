@@ -5,7 +5,7 @@ from crops.crop import Crop
 from crops.crop_infrastructure import CropInfrastructure
 from farm.field import Field
 from farm.farm_infrastructure import MachineryAndInfrastructure
-
+from measures.crop_yield import CropYield
 
 @dataclass
 class FarmedCrop:
