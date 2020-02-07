@@ -1,4 +1,7 @@
 OBSERVATIONS= dict(
+    type= 'file',
+    data_type= 'csv',
+    location= r'C:\observations',
     file_name= 'database.csv',
     separator= '|',
     column_name_map= {

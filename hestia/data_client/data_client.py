@@ -1,33 +1,20 @@
-from file_loaders.json_loader import JsonLoader
-from file_loaders.csvfie_reader import CSVFileReader
+from .file_readers.reader_factory import ReaderFactory
 
 import pandas as pd
 
+reader_factory = ReaderFactory()
+
+
 class DataClient:
-    def __init__(self, data_mapping, data_loader, ):
-        self._data_loader= data_loader
-        self._data_mapping= data_mapping
+    def __init__(self, configuration):
+        self._data_reader= reader_factory.create_reader(configuration.type, data_type= configuration.data_type)
 
-
-    def load(self, *crop_key, **names):
-        """
-        Loads data from an external source
-
-        Parameters
-        ----------
-        crop_key: str or int, required
-            A key of a crop for which the data 
-            needs to be loaded:
-            ex.: crop_name or crop
-        """
-        data = self._data_loader.load(**names)
-
-    def _get_data_frame(self):
-        dataResult= self._data_loader.load(**self._data_mapping)
-        pdFrame= pd.DataFrame(data= dataResult.Values(), columns= dataResult.Keys())
+    def get_data_frame(self):
+        dataResult= self._data_reader.read_all(**self._data_mapping)
+        pdFrame= pd.DataFrame(data=dataResult.Values(), columns=dataResult.Keys())
         return pdFrame.transpose()
     
-    def _get_data_series(self, crop_key):
-        dataResult= self._data_loader.load(**self._data_mapping)
-        frame = pd.DataFrame(dataResult)
+    def get_data_series(self, key):
+        dataResult= self._data_reader.load(**self._data_mapping)
+        return pd.DataFrame(dataResult)
 

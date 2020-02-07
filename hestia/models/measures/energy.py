@@ -10,7 +10,13 @@ class Energy:
 class Disel(Energy):
     sourceType: "Disel"
 
+    def __init__(self, amount):
+        self.amount=amount
+
 @dataclass
 class Electricity(Energy):
     sourceType: "Electricity"
-    
+
+    def __init__(self, amount):
+        self.amount=amount
+

@@ -5,4 +5,3 @@ class Fertilizer:
     name: str
     amount: float
     fertilizer_type: str
-    

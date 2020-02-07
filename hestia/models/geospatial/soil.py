@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class Soil:
     phH20: float
@@ -11,4 +12,4 @@ class Soil:
     drainage_class: float
     loss_to_auqatics: float
     erodibility: float
-    
+
