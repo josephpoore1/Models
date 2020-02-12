@@ -1,10 +1,8 @@
-from dataclasses import dataclass
-
-@dataclass
 class CropInfrastructure:
-    glass_and_perlite: float
+    type: str
+    glass: float
     plastic: float
-    rock_wool: float
+    rockwool: float
     steel: float
     aluminium: float
     iron: float

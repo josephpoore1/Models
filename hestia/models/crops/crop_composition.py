@@ -1,6 +1,3 @@
-from dataclasses import dataclass
-
-@dataclass
 class CropComposition:
     gross_energy: float
     nitrogen_amount: float

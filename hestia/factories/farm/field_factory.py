@@ -1,6 +1,7 @@
 from hestia.data_client.data_client import DataClient
-from hestia.models.farm.farm import Farm
-from hestia.factories.gespatial.country_factory import CountryFactory
+from hestia.models.farm.field import Field
+from hestia.factories.model_factory import ModelFactory
+from hestia.factories.geospatial.country_factory import CountryFactory
 
 import  pandas as pd
 
@@ -16,26 +17,24 @@ FARM_MODEL_MAP=dict(
     }
 )
 
-class FarmFactory:
-    def __init__(self, country_factory: CountryFactory):
-        self._country_factory = country_factory
+class FieldFactory(ModelFactory):
+    def __init__(self, land_factory: LandFactory):
+        self._land_factory = land_factory
 
     def create(self, key):
-        self._get_series()
-        new_farm = Farm()
-        series = self._get_record(key)
-        self._map(data_row=series, instance=new_farm)
-        new_farm.county = self._country_factory.create(key)
+        self._get_data(key)
+        instance = Field()
 
-        return new_farm
+        instance.land = self._land_factory.create(key)
 
-    def _map(self, data_row, instance: Farm):
-        instance.name, = data_row['name']
+        return instance
 
-    def set_data_frame(self, data_frame):
-        self._data_frame = data_frame
+    def _map(self, data, instance: Field):
+        instance.name = data['name']
 
-    def _get_series(self):
+        return instance
+
+    def _get_data(self):
         if self._data_frame is None:
             column_names = FARM_MODEL_MAP['column_names'].values()
             self.data_frame = self._get_csv_data(FARM_MODEL_MAP['location'], FARM_MODEL_MAP['separator'], column_names)

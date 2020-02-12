@@ -1,7 +1,3 @@
-from dataclasses import dataclass
-
-
-@dataclass
 class Soil:
     phH20: float
     clay: float

@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from activities.farm_activities import FarmActivities
-from crops.crop import Crop
-from crops.crop_infrastructure import CropInfrastructure
-from farm.field import Field
-from farm.farm_infrastructure import MachineryAndInfrastructure
-from measures.crop_yield import CropYield
+from hestia.models.activities.farm_activities import FarmActivities
+from hestia.models.crops.crop import Crop
+
+from hestia.models.farm.field import Field
+
+from hestia.models.measures.crop_yield import CropYield
 
 @dataclass
 class FarmedCrop:

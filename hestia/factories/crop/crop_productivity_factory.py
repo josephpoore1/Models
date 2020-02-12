@@ -1,4 +1,4 @@
-from hestia.factories.observations_factory import ObservationsFactory
+from hestia.factories.model_factory import ModelFactory
 from hestia.models.crops.crop_productivity import CropProductivity
 
 DATA_MAPPING = dict(
@@ -15,10 +15,12 @@ DATA_MAPPING = dict(
 )
 
 
-class CropProductivityFactory(ObservationsFactory):
+class CropProductivityFactory(ModelFactory):
     def create(self, key):
         instance=CropProductivity()
         data_row=self._get_record(key)
+        if data_row is None:
+            return  instance
 
     def _map(self, data_row, instance: CropProductivity):
         instance.cultiv_duration=data_row['cultiv_duration']
@@ -30,3 +32,6 @@ class CropProductivityFactory(ObservationsFactory):
 
     def _get_record(self, key):
         data=self._get_data_frame()
+        if data is None:
+            data=self._get_lookup_data(DATA_MAPPING['location'],DATA_MAPPING['column_names'] )
+        return data

@@ -1,9 +1,7 @@
 from dataclasses import dataclass
-from datetime import timedelta
 
 @dataclass
-class LandUseManagement:
-    cultivation_duration: timedelta
+class LandManagement:
+    cultivation_duration: int
     crop_allocation: float
     fallow_allocation: float
-    

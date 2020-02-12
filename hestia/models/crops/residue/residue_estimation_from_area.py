@@ -22,7 +22,3 @@ class ResidueEstimationFromArea:
     n_content_bg: float
     combustion_factor: float
     source: str
-
-    def __init__(self, crop_name):
-        self.crop_name = crop_name
-        
