@@ -1,6 +1,4 @@
-from dataclasses import dataclass
-from crops.crop_residue import CropResidue
+from hestia.models.crops.residue.residue import CropResidue
 
-@dataclass
 class ResidueManagement: 
     crop_residue: CropResidue

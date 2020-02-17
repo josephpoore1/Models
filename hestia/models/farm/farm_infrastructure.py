@@ -1,12 +1,12 @@
-from dataclasses import dataclass
 from hestia.models.farm.machinery.machinery import Machinery
-from hestia.models.farm.irrigation.irrigation import Irrigation
-from hestia.models.farm.processing.processing import Processing
+from hestia.models.activities.irrigation.irrigation import Irrigation
+from hestia.models.activities.processing.crop_processing import ProcessingInfrastructure
+from hestia.models.farm.plant_infrastructure import PlantInfrastructure
 
 
-@dataclass
 class FarmInfrastructure:
     machinery: Machinery
     irrigation: Irrigation
-    processing: Processing
+    processing: ProcessingInfrastructure
+    plant: PlantInfrastructure
     plastic: float

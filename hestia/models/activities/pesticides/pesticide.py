@@ -1,7 +1,6 @@
-from dataclasses import dataclass
+from dataclasses import  dataclass
 
-
-@dataclass
+@dataclass()
 class Pesticide:
     name: str
-    percentage: float
+    amount: float

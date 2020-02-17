@@ -3,7 +3,7 @@ MODEL_MAPPING=dict(
     location_type='directory',
     data_format='json',
     separator='|',
-    id_key='id',
+    id_key='value',
     column_names={
         # ToDO: create List_Climate_Name '': 'name',
         'List_Climate_Zone': 'value',

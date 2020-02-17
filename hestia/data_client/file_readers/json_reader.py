@@ -6,7 +6,7 @@ class JsonReader:
         self._source = source
 
     def read(self,**kwargs):
-        result = { key : self._open(value) for key, value in kwargs.items() }
+        result = { value : self._open(key) for key, value in kwargs.items() }
         return result
 
     def _open(self, name: str):

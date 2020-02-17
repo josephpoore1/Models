@@ -1,6 +1,3 @@
-from dataclasses import dataclass
-
-@dataclass
 class EcoClimateZone:
     name: str
     value: int

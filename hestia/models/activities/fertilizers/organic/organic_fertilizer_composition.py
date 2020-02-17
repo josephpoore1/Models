@@ -1,6 +1,3 @@
-from dataclasses import  dataclass
-
-@dataclass
 class OrganicFertilizerComposition:
     liquid_or_slurry: float
     solid: float

@@ -17,6 +17,7 @@ MODEL_MAPPING=dict(
         'OY': 'org_carbon',
         'PE': 'loss_to_aquatics',
         'OZ': 'nitrogen',
-        'PF': 'erodibility'
+        'PF': 'erodibility',
+        'PD': 'drainage'
     }
 )

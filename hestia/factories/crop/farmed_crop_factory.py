@@ -1,68 +1,54 @@
 from hestia.factories.model_factory import ModelFactory
-from . import crop_factory, crop_characterstics_factory, crop_productivity_factory, crop_composition_factory
 from hestia.models.farmed_crop import FarmedCrop
+from hestia.models.farmed_crop_mapping import MODEL_MAPPING
+
 from hestia.models.measures.crop_yield import CropYield
-
-import sys
-
-DATA_MAPPING = dict(
-    location=r'observations.csv',
-    separator='|',
-    id_key='id',
-    column_names= {
-        'id': 'AQ',
-        'name': 'MI',
-        'yield_dm': 'OF',
-        'yield_mkt': 'OH',
-        'seed': 'MK'
-    }
-)
 
 
 class FarmedCropFactory(ModelFactory):
-    def __init__(self, crop_factory, crop_activities_factory, field_factory, infrastructure_factory, machinery_factory):
+    def __init__(self, crop_factory, crop_activities_factory, field_factory, infrastructure_factory):
+        super().__init__()
         self._crop_factory = crop_factory
         self._crop_activities_factory = crop_activities_factory
         self._field_factory = field_factory
         self._infrastructure_factory = infrastructure_factory
-        self._machinery_factory = machinery_factory
 
     def create(self, crop_key):
-        data=self._get_data(crop_key)
+        data=self._get_record(crop_key)
+
         instance=FarmedCrop()
 
-        instance.crop=self._crop_factory.create(crop_key)
-        instance.activities=self._crop_activities_factory.create(crop_key)
-        instance.field=self._field_factory.create(crop_key)
-        instance.infrastructure=self._infrastructure_factory.create(crop_key)
-        instance.machinery=self._machinery_factory.create(crop_key)
+        self._set_crop(instance, crop_key)
+        self._set_field(instance, crop_key)
+        self._set_activities(instance, crop_key)
+        self._set_infrastructure(instance, crop_key)
+
         return self._map(instance, data)
 
-    def _get_data(self, crop_key):
-        crop_data = self._get_observations_data(DATA_MAPPING['location'], DATA_MAPPING['separator'], DATA_MAPPING['column_names'])
-        data=crop_data[crop_key]
+    def _gapfill(self, data_fame):
+        pass
 
-        return data
+    def _get_record(self, crop_key):
+        data_frame = self._data_frame
+        if data_frame is None:
+            data_frame = self._get_data_frame(MODEL_MAPPING)
+
+        data_table = self._create_table(data_frame, MODEL_MAPPING['column_names'],
+                                        MODEL_MAPPING['id_key'])
+        return data_table.loc[crop_key]
 
     def _map(self,instance:FarmedCrop, data):
         instance.crop_yield=CropYield(data['yield_dm'], data['yield_mkt'])
-        instance.farming_time=data['farm_duration']
         instance.seed=data['seed']
 
+    def _set_crop(self, instance, key):
+        instance.crop = self._crop_factory.create(key)
 
-def main(**kwargs):
-    print('Building a crop')
-    c_factory = CropFactory()
-    c_activites_factory = CropActivitiesFactory()
-    field_factory = FieldFactory()
-    infrastructure_factory = FarmInfrastructureFactory()
-    machinery_factory = MachineryFactory()
-    fc_factory = FarmedCropFactory(c_factory,c_activites_factory,field_factory,infrastructure_factory,machinery_factory)
-    crop = fc_factory.create(kwargs['crop_key'])
-    print('Done')
-    print(crop)
+    def _set_field(self, instance, key):
+        instance.field = self._field_factory.create(key)
 
+    def _set_activities(self, instance, key):
+        instance.activities = self._crop_activities_factory.create(key)
 
-if __name__ == '__main__':
-    crop_key=sys.argv[1]
-    main(crop_key)
+    def _set_infrastructure(self, instance, key):
+        instance.infrastructure = self._infrastructure_factory.create(key)

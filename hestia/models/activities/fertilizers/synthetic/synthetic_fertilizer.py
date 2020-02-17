@@ -1,10 +1,8 @@
-from dataclasses import dataclass
-from ..fertilizer import Fertilizer
+from hestia.models.activities.fertilizers.synthetic.synthetic_fertilizer_composition import SyntheticFertilizerComposition
 
 
-@dataclass
-class SyntheticFertilizer(Fertilizer):
-    name: str
-    amount: float
-    chemical_formula: str
-    fertilizer_type = "Synthetic"
+class SyntheticFertilizer():
+    n_amount: float
+    p_amount: float
+    k_amount: float
+    composition: SyntheticFertilizerComposition

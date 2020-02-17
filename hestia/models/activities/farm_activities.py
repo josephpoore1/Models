@@ -1,21 +1,16 @@
-from dataclasses import dataclass
+from hestia.models.activities.fertilizing import Fertilizing
+from hestia.models.activities.pesticides.pesticide_management import PesticideManagement
+from hestia.models.activities.irrigation.irrigation import Irrigation
+from hestia.models.activities.residue_management import ResidueManagement
+from hestia.models.farm.land_management import LandManagement
+from hestia.models.activities.tillage_management import TillageManagement
+from hestia.models.activities.processing.crop_processing import CropProcessing
 
-from fertilizing import Fertilizing
-from irrigation import Irrigation
-from pesticide_management import PesticideManagement
- 
-@dataclass
+
 class FarmActivities:
     fertilizing: Fertilizing
     irrigation: Irrigation
-    pests: PesticideManagement
-
-    def addFertilizer(self, fertilizer):
-        if self.fertilizing is None:
-            self.fertilizing = Fertilizing()
-
-        self.fertilizing.addFertilizer(fertilizer)
-    
-    def addIrrigation(self, irrigation):
-        self.irrigation = irrigation
-    
+    pest_management: PesticideManagement
+    residue_management: ResidueManagement
+    land_management: LandManagement
+    crop_processing: CropProcessing

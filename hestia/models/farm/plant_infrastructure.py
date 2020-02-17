@@ -1,4 +1,4 @@
-class CropInfrastructure:
+class PlantInfrastructure:
     type: str
     glass: float
     plastic: float

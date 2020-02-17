@@ -1,15 +1,7 @@
 from hestia.factories.model_factory import ModelFactory
 from hestia.models.crops.crop import Crop
 
-DATA_MAPPING = dict(
-    location=r'observations.csv',
-    separator='|',
-    id_key='id',
-    column_names= {
-        'id': 'AQ',
-        'name': 'MI'
-    }
-)
+
 
 class CropFactory(ModelFactory):
     def __init__(self, crop_characteristics_factory, crop_composition_factory, crop_prouctivity_factory):

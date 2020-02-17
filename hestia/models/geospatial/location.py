@@ -1,4 +1,4 @@
-
+from hestia.models.geospatial.position import Position
 
 class Location:
     position: Position
