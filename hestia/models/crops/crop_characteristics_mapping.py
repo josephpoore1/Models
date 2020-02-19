@@ -6,7 +6,7 @@ MODEL_MAPPING=dict(
     id_key='id',
     column_names={
         'AQ': 'id',
-        'crop_name': 'MI',
-        'OU': 'root_depth'
+        'MI': 'crop_name',
+        'OU': 'crop_root_depth'
         }
 )

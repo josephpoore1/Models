@@ -1,4 +1,4 @@
-from .file_readers.reader_factory import ReaderFactory
+from hestia.data_client.file_readers.reader_factory import ReaderFactory
 
 import pandas as pd
 

@@ -4,7 +4,7 @@ from hestia.models.activities.fertilizers.synthetic.synthetic_fertilizer_composi
 from hestia.models.activities.fertilizers.synthetic.synthetic_fertilizer_mapping import MODEL_MAPPING
 
 
-class OrganicFertilizerFactory(ModelFactory):
+class SyntheticFertilizerFactory(ModelFactory):
     def __init__(self):
         super().__init__()
 
@@ -25,11 +25,11 @@ class OrganicFertilizerFactory(ModelFactory):
 
         instance = SyntheticFertilizer()
         self._set_composition(instance, record)
-        self._map(instance, record, None)
+        self._map(instance, record)
 
         return instance
 
-    def _map(self, instance, data, props):
+    def _map(self, instance, data):
         instance.n_amount = data['n_amount']
         instance.p_amount = data['p_amount']
         instance.k_amount = data['k_amount']

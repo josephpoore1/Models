@@ -1,6 +1,3 @@
-from dataclasses import dataclass
-
-@dataclass
 class CropProductivity:
     nursery_duration: float
     sapling_yield: float

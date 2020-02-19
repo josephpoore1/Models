@@ -6,12 +6,13 @@ from hestia.factories.farm.land_factory import LandFactory
 
 class FieldFactory(ModelFactory):
     def __init__(self, land_factory: LandFactory):
+        super().__init__()
         self._land_factory = land_factory
 
     def create(self, key):
         data = self._get_record(key)
         instance = Field()
-        self._set_land(data, instance)
+        self._set_land(data, key)
         return self._map(data, instance)
 
     def _set_land(self, instance, key):

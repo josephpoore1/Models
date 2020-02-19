@@ -2,9 +2,7 @@
 Source: IPCC (2006) Vol. 4 Table 2.6 and 11.2, with adjustments
 '''
 
-from dataclasses import dataclass
 
-@dataclass
 class ResidueEstimateFromDMYield:
     crop_name: str
     slope: float

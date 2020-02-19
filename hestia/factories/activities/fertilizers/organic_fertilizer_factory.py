@@ -4,7 +4,7 @@ from hestia.models.activities.fertilizers.organic.organic_fertilizer import Orga
 from hestia.models.activities.fertilizers.organic.organic_fertilizer_mapping import MODEL_MAPPING
 
 
-class ExcretaFactory(ModelFactory):
+class OrganicFertilizerFactory(ModelFactory):
     def __init__(self):
         super().__init__()
 
@@ -26,11 +26,11 @@ class ExcretaFactory(ModelFactory):
         instance = OrganicFertilizer()
         self._set_n_composition(instance, record)
         self._set_tan_composition(instance, record)
-        self._map(instance, record, None)
+        self._map(instance, record)
 
         return instance
 
-    def _map(self, instance, data, props):
+    def _map(self, instance, data):
         instance.n_amount = data['n_amount']
         instance.tan_amount = data['tan_amount']
         instance.p_amount = data['p_amount']

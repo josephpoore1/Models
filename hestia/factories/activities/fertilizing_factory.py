@@ -34,7 +34,7 @@ class FertilizingFactory(ModelFactory):
 
          return fertilizers
 
-     def _map(self, instance, data, props):
+     def _map(self, instance, data):
          instance.dolomite = data['dolomite']
          instance.lime = data['lime']
 

@@ -5,7 +5,7 @@ from hestia.factories.model_factory import ModelFactory
 
 class LandFactory(ModelFactory):
     def __init__(self, soil_factory, weather_factory, location_factory):
-        super().__init__(self)
+        super().__init__()
         self._soil_factory = soil_factory
         self._weather_factory = weather_factory
         self._location_factory = location_factory
@@ -34,9 +34,9 @@ class LandFactory(ModelFactory):
         pass
 
     def _map(self, instance: Land, data: dict):
-        instance.area = data['aera']
         instance.sp = data['sp']
-        instance.geography = data['geography_spec']
+        instance.geography = data['geogr_spec']
+        instance.country = data['country']
         return instance
 
     def _set_location(self, instance: Land, location_key):

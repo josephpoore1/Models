@@ -22,9 +22,9 @@ class ExcretaFactory(ModelFactory):
     def create(self, key):
         record = self._get_record(key)
         instance = Excreta()
-        self._map(instance, record, None)
+        self._map(instance, record)
         return instance
 
-    def _map(self, instance, data, props):
+    def _map(self, instance, data):
         instance.n_amount = data['n_amount']
         instance.tan_amount = data['tan_amount']

@@ -3,6 +3,7 @@ from hestia.models.activities.irrigation.irrigation import Irrigation
 from hestia.models.activities.irrigation.irrigation_mapping import MODEL_MAPPING
 from hestia.models.measures.energy import Energy
 
+
 class IrrigationFactory(ModelFactory):
      def __init__(self):
          super().__init__()

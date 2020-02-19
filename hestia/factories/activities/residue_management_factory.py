@@ -1,7 +1,6 @@
 from hestia.factories.model_factory import ModelFactory
 from hestia.models.activities.residue_management import ResidueManagement, CropResidue
 from hestia.models.crops.residue.residue_mapping import MODEL_MAPPING
-from hestia.models.measures.energy import Energy
 
 
 class ResidueManagementFactory(ModelFactory):
@@ -31,10 +30,10 @@ class ResidueManagementFactory(ModelFactory):
 
     def _set_crop_residue(self, instance, record):
         crop_residue = CropResidue()
-        crop_residue.above_ground_remaining = record['ag_remaining']
-        crop_residue.below_ground_remaining = record['bg_remaining']
+        crop_residue.above_ground_remaining = record['above_ground_remaining']
+        crop_residue.below_ground_remaining = record['below_ground_remaining']
         crop_residue.burnt_kg = record['burnt_kg']
-        crop_residue.burnt_percent = record['burnt_prct']
+        crop_residue.burnt_percent = record['burnt_percent']
         crop_residue.removed = record['removed']
         crop_residue.total = record['total']
         instance.residue = crop_residue

@@ -1,21 +1,15 @@
 from hestia.factories.model_factory import ModelFactory
 from hestia.models.crops.crop_productivity import CropProductivity
-
-DATA_MAPPING = dict(
-    location=r'standardisation',
-    id_key='id',
-    column_names= {
-        'nursery_duration': 'Table_OrchardCrops_NursDur',
-        'sapling_yield': 'Table_OrchardCrops_SapYield',
-        'orch_density': 'Table_OrchardCrops_OrchDens',
-        'cultiv_duration': 'Table_OrchardCrops_CultDur',
-        'fallow_period': 'Table_OrchardCrops_FallowDur',
-        'non_bear_duration': 'Table_OrchardCrops_NonBearDur'
-    }
-)
+from hestia.models.crops.crop_productivity_mapping import MODEL_MAPPING
 
 
 class CropProductivityFactory(ModelFactory):
+    def __init__(self):
+        super().__init__()
+
+    def _gapfill(self, data_fame):
+        pass
+
     def create(self, key):
         instance=CropProductivity()
         data_row=self._get_record(key)
@@ -31,7 +25,10 @@ class CropProductivityFactory(ModelFactory):
         instance.sapling_yield=data_row['sapling_yield']
 
     def _get_record(self, key):
-        data=self._get_data_frame()
-        if data is None:
-            data=self._get_lookup_data(DATA_MAPPING['location'],DATA_MAPPING['column_names'] )
-        return data
+        df = self._data_frame
+        if df is None:
+            df = self._get_data_frame(MODEL_MAPPING)
+
+        data_table = self._create_table(df, MODEL_MAPPING['column_names'],
+                                        MODEL_MAPPING['id_key'])
+        return data_table.loc[key]

@@ -3,6 +3,7 @@ from hestia.models.activities.processing.crop_processing import CropProcessing
 from hestia.models.activities.processing.crop_processing_mapping import MODEL_MAPPING
 from hestia.models.measures.energy import Energy
 
+
 class CropProcessingFactory(ModelFactory):
      def __init__(self):
          super().__init__()

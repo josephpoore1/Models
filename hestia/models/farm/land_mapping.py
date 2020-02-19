@@ -6,7 +6,7 @@ MODEL_MAPPING=dict(
     id_key='id',
     column_names={
         'AQ': 'id',
-        'I': 'country_name',
+        'I': 'country',
         'O': 'sp',
         'J': 'geogr_spec'
         }

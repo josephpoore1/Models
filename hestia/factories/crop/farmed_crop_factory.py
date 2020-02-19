@@ -1,7 +1,6 @@
 from hestia.factories.model_factory import ModelFactory
 from hestia.models.farmed_crop import FarmedCrop
 from hestia.models.farmed_crop_mapping import MODEL_MAPPING
-
 from hestia.models.measures.crop_yield import CropYield
 
 
@@ -22,8 +21,9 @@ class FarmedCropFactory(ModelFactory):
         self._set_field(instance, crop_key)
         self._set_activities(instance, crop_key)
         self._set_infrastructure(instance, crop_key)
+        self._map(instance, data)
 
-        return self._map(instance, data)
+        return instance
 
     def _gapfill(self, data_fame):
         pass

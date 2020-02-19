@@ -3,10 +3,7 @@ Note: Roots assumed to be removed in permanent
 crops at orchard end of life (except oil palm), consistent with best practice pest control
 '''
 
-from dataclasses import dataclass
 
-
-@dataclass
 class ResidueEstimationFromArea:
     crop_name: str
     whole_plnt_ag_dm: int

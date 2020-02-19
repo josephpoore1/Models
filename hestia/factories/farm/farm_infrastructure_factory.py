@@ -4,16 +4,14 @@ from hestia.factories.model_factory import ModelFactory
 
 
 class FarmInfrastructureFactory(ModelFactory):
-    def __init__(self, machinery_factory, processing_factory, plant_factory):
+    def __init__(self, machinery_factory, plant_factory):
         super().__init__()
         self._machinery_factory = machinery_factory
-        self._processing_factory = processing_factory
         self._plant_factory = plant_factory
 
     def create(self, key):
         data = self._get_record(key)
         instance = FarmInfrastructure()
-        self._set_processing(instance, key)
         self._set_machinery(instance, key)
         self._set_plant_infrastructure(instance, key)
 
@@ -40,10 +38,6 @@ class FarmInfrastructureFactory(ModelFactory):
     def _set_plant_infrastructure(self, instance: FarmInfrastructure, plant_infst_key):
         plant_infrastructure = self._plant_factory.create(plant_infst_key)
         instance.plant = plant_infrastructure
-
-    def _set_processing(self, instance: FarmInfrastructure, processing_key):
-        processing = self._processing_factory.create(processing_key)
-        instance.processing = processing
 
     def _set_machinery(self, instance: FarmInfrastructure, machinery_key):
         machinery = self._machinery_factory.create(machinery_key)

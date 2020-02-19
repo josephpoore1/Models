@@ -1,11 +1,18 @@
 from hestia.factories.model_factory import ModelFactory
 from hestia.models.crops.crop_composition import CropComposition
-from hestia.models.crops.crop_composition_mapping import MODEL_MAPPING
+
 
 class CropCompositionFactory(ModelFactory):
-    def __init__(self):
-        super().__init__(self)
+    def _get_record(self, key):
+        pass
 
-    def create(self):
+    def _gapfill(self, data_fame):
+        pass
+
+    def __init__(self):
+        super().__init__()
+
+    def create(self, key):
         instance = CropComposition()
+        return instance
 

@@ -2,6 +2,7 @@ from hestia.factories.model_factory import ModelFactory
 from hestia.models.activities.farm_activities import FarmActivities
 from hestia.models.activities.farm_activities_mapping import MODEL_MAPPING
 
+
 class CropActivitiesFactory(ModelFactory):
     def __init__(self, fertilizing_factory, pests_mgmt_factory,
                  residue_mgmt_factory, land_mgmt_factory,
