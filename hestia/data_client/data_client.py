@@ -1,20 +1,32 @@
-from hestia.data_client.file_readers.reader_factory import ReaderFactory
-
+from hestia.data_client.file_readers.json_reader import JsonReader
 import pandas as pd
-
-reader_factory = ReaderFactory()
 
 
 class DataClient:
-    def __init__(self, configuration):
-        self._data_reader= reader_factory.create_reader(configuration.type, data_type= configuration.data_type)
+    def __init__(self):
+        pass
 
-    def get_data_frame(self):
-        dataResult= self._data_reader.read_all(**self._data_mapping)
-        pdFrame= pd.DataFrame(data=dataResult.Values(), columns=dataResult.Keys())
-        return pdFrame.transpose()
-    
+    def get_data_frame(self, configuration):
+        from_file = configuration['location']
+        use_columns = configuration['column_names']
+        location_type = configuration['location_type']
+
+        if location_type == 'directory':
+            return self.get_lookup_data(from_file, use_columns)
+        if location_type == 'file':
+            column_delimiter = configuration['separator']
+            return self.get_observations_data(from_file, column_delimiter, use_columns)
+
+        raise Exception('location_type is not supported')
+
+    def get_observations_data(self, from_file, delimiter, columns=None):
+        return pd.read_csv(from_file, delimiter= delimiter, usecols=columns)
+
+    def get_lookup_data(self, lookup_data_source, columns):
+        json_reader = JsonReader(lookup_data_source)
+        data = json_reader.read(**columns)
+        return data
+
     def get_data_series(self, key):
-        dataResult= self._data_reader.load(**self._data_mapping)
-        return pd.DataFrame(dataResult)
+        raise NotImplementedError()
 

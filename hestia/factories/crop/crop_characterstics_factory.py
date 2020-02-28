@@ -17,7 +17,7 @@ class CropCharacteristicsFactory(ModelFactory):
 
     def _map(self,instance, data_row):
         instance.crop_name=data_row['crop_name']
-        instance.crop_root_depth=['crop_root_depth']
+        instance.crop_root_depth=data_row['crop_root_depth']
         return instance
 
     def _get_record(self, key):

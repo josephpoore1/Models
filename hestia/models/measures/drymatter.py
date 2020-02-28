@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
+
 @dataclass
-class DryMatter: 
+class DryMatter:
     amount: float
     standard_deviation: float
     

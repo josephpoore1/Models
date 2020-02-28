@@ -1,4 +1,10 @@
-class Soil:
+from hestia.models.object_model import ObjectModel
+
+
+class Soil(ObjectModel):
+    def __init__(self):
+        super().__init__()
+
     phH20: float
     clay: float
     sand: float

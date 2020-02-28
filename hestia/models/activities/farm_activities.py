@@ -1,4 +1,4 @@
-from hestia.models.activities.fertilizing import Fertilizing
+from hestia.models.activities.fertilizers.fertilizers import Fertilizers
 from hestia.models.activities.pesticides.pesticide_management import PesticideManagement
 from hestia.models.activities.irrigation.irrigation import Irrigation
 from hestia.models.activities.residue_management import ResidueManagement
@@ -8,7 +8,7 @@ from hestia.models.activities.processing.crop_processing import CropProcessing
 
 
 class FarmActivities:
-    fertilizing: Fertilizing
+    fertilizing: Fertilizers
     irrigation: Irrigation
     pest_management: PesticideManagement
     residue_management: ResidueManagement

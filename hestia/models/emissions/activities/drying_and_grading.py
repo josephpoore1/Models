@@ -1,4 +1,4 @@
-from ...farmed_crop import FarmedCrop
+from hestia.models.emissions.activities import FarmedCrop
 
 class DryingAndGradingEmissions:
     co2: float

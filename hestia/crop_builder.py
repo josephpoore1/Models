@@ -25,6 +25,7 @@ from hestia.factories.geospatial.country_factory import CountryFactory
 from hestia.factories.farm.infrastructure.machinery_factory import MachineryFactory
 from hestia.factories.farm.infrastructure.plant_infrastructure_factory import PlantInfrastructureFactory
 
+
 class FarmedCropBuilder:
     def __init__(self):
         _crop_characteristics_factory = CropCharacteristicsFactory()
