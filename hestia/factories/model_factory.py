@@ -21,10 +21,6 @@ class ModelFactory(ABC):
     def create(self, key):
         pass
 
-    # @property
-    # def data_frame(self):
-    #     return self._data_frame
-
     def set_data_frame(self, data_frame):
         self._data_frame = data_frame
 
