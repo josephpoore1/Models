@@ -4,3 +4,12 @@ hestia/lookups/name_mappings/__pycache__/crop_residue_mappings.cpython-37.pyc
 hestia/data_client/file_loaders/__pycache__/json_loader.cpython-37.pyc
 .vscode/.ropeproject/objectdb
 .vscode/.ropeproject/config.py
+.idea/hestia.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
+hestia/data_client/file_readers/__pycache__/json_loader.cpython-37.pyc
+hestia/factories/farm/__pycache__/soil_factory.cpython-37.pyc
+ **/*.pyc
+ *.__pycache__
