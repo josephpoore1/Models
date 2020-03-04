@@ -5,12 +5,16 @@ DATA_MAPPING = dict(
         'Conv_Diesel_kg_kWh':'net_heating_diesel_kWh',
         'Conv_GWP_N2O':'gwp_n2o',
         'Conv_GWP_CH4':'gwp_ch4',
+        'Conv_Fert_UAN_Urea': 'synth_fert_nutrient_urea_n',
         # atomic weights
         'Conv_Mol_N2ON_N2O':'c_n2on_n2o',
         'Conv_Mol_NO3N_NO3':'c_no3n_no3',
         'Conv_Mol_NH3N_NH3':'c_nh3n_nh3',
         'Conv_Mol_NON_NO':'c_non_no',
         # emission factors
+        'EF_Dolomite_CO2':'co2_dolomite',
+        'EF_Lime_CO2':'co2_lime',
+        'EF_Urea_CO2':'co2_urea',
         'EF_Fert_High_NO3N':'c_leaching_no3_n_high',
         'EF_Fert_Low_NO3N':'c_leaching_no3_n_low',
         'EF_Fert_NO3N':'c_leaching_no3_n_other',

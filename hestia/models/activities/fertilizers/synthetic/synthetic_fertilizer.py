@@ -2,7 +2,7 @@ from hestia.models.activities.fertilizers.synthetic.synthetic_fertilizer_composi
 
 
 class SyntheticFertilizer():
-    n_amount: float
-    p_amount: float
-    k_amount: float
+    n: float
+    p: float
+    k: float
     composition: SyntheticFertilizerComposition

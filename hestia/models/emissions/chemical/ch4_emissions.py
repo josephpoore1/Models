@@ -1,3 +1,4 @@
+from hestia.models.references.repository import ReferencesRepository
 from hestia.models.activities.residue_management import CropResidue
 from hestia.models.farmed_crop import FarmedCrop
 
@@ -5,15 +6,14 @@ from hestia.models.farmed_crop import FarmedCrop
 class CH4Emission:
     residue_burn: float
 
-    def __init__(self):
-        pass
+    def __init__(self, references_repository: ReferencesRepository):
+        self._references = references_repository
 
-    def create_for(self, crop: FarmedCrop):
-        emission_factor = self._data['EF_Burn_DM_CH4']
-
+    def calculate_for(self, crop: FarmedCrop):
         instance = CH4Emission()
-        instance.residue_burn = self._get_residue_burn(crop.activities.residue_management.crop_residue, emission_factor)
+        instance.residue_burn = self._get_residue_burn(crop.activities.residue_management.crop_residue)
         return instance
 
-    def _get_residue_burn(self, residue: CropResidue, emission_factor):
-        return residue.BurntDM * emission_factor
+    def _get_residue_burn(self, residue: CropResidue):
+        emission_factors = self._references.get_res_burn_emissions()
+        return residue.BurntDM * emission_factors['ch4']

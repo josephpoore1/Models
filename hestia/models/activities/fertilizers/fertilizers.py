@@ -11,4 +11,4 @@ class Fertilizers:
     dolomite: float
 
     def total_n(self):
-        return np.sum(self.synthetic.n_amount, self.organic.n_amount, self.excreta.n_amount)
+        return np.sum(self.synthetic.n, self.organic.n, self.excreta.n)

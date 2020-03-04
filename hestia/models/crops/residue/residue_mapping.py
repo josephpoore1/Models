@@ -6,11 +6,15 @@ MODEL_MAPPING=dict(
     id_key='id',
     column_names={
         'AQ': 'id',
+        'OS': 'total',
         'ON': 'removed',
         'OO': 'burnt_percent',
         'OP': 'burnt_kg',
         'OQ': 'above_ground_remaining',
         'OR': 'below_ground_remaining',
-        'OS': 'total'
+        'OF': 'yield_dm',
+        'OH': 'yield_mkt',
+        'MI': 'crop_name',
+        'I': 'country'
         }
 )

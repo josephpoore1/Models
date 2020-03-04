@@ -25,6 +25,7 @@ class ExcretaFactory(ModelFactory):
         self._map(instance, record)
         return instance
 
-    def _map(self, instance, data):
+    def _map(self, instance: Excreta, data):
         instance.n_amount = data['n_amount']
         instance.tan_amount = data['tan_amount']
+        instance.animal = data['animal']

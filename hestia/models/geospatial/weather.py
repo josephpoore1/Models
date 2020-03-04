@@ -11,3 +11,9 @@ class Weather(ObjectModel):
 
     def __init__(self):
         super().__init__()
+
+    def get_average_temp_index(self):
+        return \
+            'cool' if self.average_temperature <= 14 else \
+            'temperate' if (self.average_temperature > 15 and self.average_temperature < 25) else \
+            'warm'

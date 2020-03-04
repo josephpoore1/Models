@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from hestia.data_client.data_client import DataClient
+from hestia.models.references.repository import ReferencesRepository
 import pandas as pd
 
 
@@ -7,6 +8,7 @@ class ModelFactory(ABC):
     def __init__(self):
         self._data_frame = None
         self._data_client = DataClient()
+        self._references = ReferencesRepository()
 
     @abstractmethod
     def _get_record(self, key):

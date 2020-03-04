@@ -18,13 +18,17 @@ class ReferencesRepository(DataClient):
         self._lists = self.get_lookup_data(DATA_MAPPING['location'],
                                                       DATA_MAPPING['lists'])
 
+    def get_synth_fertilizer_nutrient_composition(self):
+        return {
+            'urea' :  self._constants['synth_fert_nutrient_urea_n'],
+        }
     def get_climate_zones(self):
         c_n2o_n = self._lists['climate_n2o_n']
         climate_zones = self._lists['climate_zone']
         return pd.Series(c_n2o_n, index= climate_zones)
 
-    def get_residue_estimation_factors(self):
-        names = self._lists['residue_name']
+    def get_residue_est_from_dm_yield(self):
+        names = self._lists['residue_crop_names']
         slope = self._lists['residue_slope']
         intercept = self._lists['residue_intercept']
         n_content_ag = self._lists['residue_n_content_ag']
@@ -41,7 +45,7 @@ class ReferencesRepository(DataClient):
         return {
             'synthetic' : self._constants['loss_factor_synt_n'],
             'organic' : self._constants['loss_factor_org_n']
-        }
+        }`
 
     def get_p_loos_c2_factors_tillage(self):
         c2_factor = self._lists['p_loss_c2_till_factor']
@@ -54,9 +58,14 @@ class ReferencesRepository(DataClient):
             'n2o': self._constants['n2o_residue_burn_direct'],
             'nh3': self._constants['nh3_residue_burn_direct'],
             'nox': self._constants['nox_residue_burn_direct'],
-            'ch4': self._constants['ch4_residue_burn_direct'],
-
+            'ch4': self._constants['ch4_residue_burn_direct']
             }
+
+    def get_co2_from_urea_and_lime(self):
+        return {
+            'urea': self._constants['co2_urea'],
+            'lime': self._constants['co2_lime'],
+            'dolomite': self._constants['co2_dolomite']
 
     def get_n2o_from_residue(self):
         return self._constants['n2o_residue_direct']
@@ -157,17 +166,8 @@ class ReferencesRepository(DataClient):
         return {
             'organic': pd.Series(self._lists['nh3_tan_from_org_fert']),
             'excreta': pd.Series(self._lists['nh3_emiss_from_excreta_tan'],
-                                 index= self._lists['nh3_tan_from_org_fert'])
+                                 index= self._lists['nh3_emiss_from_excreta_sources'])
         }
-
-    def get_residue_est_from_dm_yield(self):
-        ag = self._lists['residue_n_content_ag']
-        bg = self._lists['residue_n_content_bg']
-        ratio = self._lists['residue_ratio_ag_to_bg']
-        crops = self._lists['residue_crop_names']
-
-        frame = pd.DataFrame(data=(ag, bg, ratio)).transpose()
-        return frame.set_index(crops)
 
     def get_nh3_for_acidic_soil(self):
         table = self._lists['nh3_synth_acid_soil']
@@ -195,7 +195,7 @@ class ReferencesRepository(DataClient):
 
         return pd.Series(c1_factor, index=crop)
 
-    def get_residue_removed_share(self):
+    def get_residue_burn_share(self):
         removed = self._lists['residue_burn_share']
         crop_name = self._lists['residue_removed_share_crops']
         country = self._lists['residue_removed_share_countries']
