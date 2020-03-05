@@ -5,8 +5,9 @@ import pandas as pd
 
 class ReferencesRepository(DataClient):
     def __init__(self):
-        self._constants = dict
-        self._lists = dict
+        super().__init__()
+        self._constants = dict()
+        self._lists = dict()
         self._fetch_constants()
         self._fetch_lists()
 
@@ -22,10 +23,12 @@ class ReferencesRepository(DataClient):
         return {
             'urea' :  self._constants['synth_fert_nutrient_urea_n'],
         }
-    def get_climate_zones(self):
-        c_n2o_n = self._lists['climate_n2o_n']
+
+    def get_climate_zone_emissions(self):
+        n2o_n = self._lists['climate_n2o_n']
+        nox_n = self._lists['climate_nox_n']
         climate_zones = self._lists['climate_zone']
-        return pd.Series(c_n2o_n, index= climate_zones)
+        return pd.DataFrame((n2o_n,nox_n), index= climate_zones)
 
     def get_residue_est_from_dm_yield(self):
         names = self._lists['residue_crop_names']
@@ -45,7 +48,7 @@ class ReferencesRepository(DataClient):
         return {
             'synthetic' : self._constants['loss_factor_synt_n'],
             'organic' : self._constants['loss_factor_org_n']
-        }`
+        }
 
     def get_p_loos_c2_factors_tillage(self):
         c2_factor = self._lists['p_loss_c2_till_factor']
@@ -54,7 +57,7 @@ class ReferencesRepository(DataClient):
         return pd.Series(c2_factor, index=c2_tillage)
 
     def get_res_burn_emissions(self):
-        return  {
+        return {
             'n2o': self._constants['n2o_residue_burn_direct'],
             'nh3': self._constants['nh3_residue_burn_direct'],
             'nox': self._constants['nox_residue_burn_direct'],
@@ -66,6 +69,7 @@ class ReferencesRepository(DataClient):
             'urea': self._constants['co2_urea'],
             'lime': self._constants['co2_lime'],
             'dolomite': self._constants['co2_dolomite']
+        }
 
     def get_n2o_from_residue(self):
         return self._constants['n2o_residue_direct']
@@ -76,7 +80,7 @@ class ReferencesRepository(DataClient):
 
         return pd.Series(factors, index= countries)
 
-    def get_p_practices_by_locations(self):
+    def get_spatial_p_practices(self):
         p_index = self._lists['p_practice_by_location']
         p_index_locations = self._lists['p_practice_locations']
 
@@ -149,7 +153,6 @@ class ReferencesRepository(DataClient):
             self._constants['acid_concrete'],
             self._constants['acid_wood']
         )
-
 
         return pd.DataFrame(data=(ghg, acid, eutr), columns=columns, index=('ghg','acid','eutr'))
 
@@ -238,7 +241,7 @@ class ReferencesRepository(DataClient):
     def get_atomic_weight_conversions(self):
         return{
             'n2on_n2o': self._constants['c_n2on_n2o'],
-            'nh3n_nh3': self._constants['c_nh3n_nh3'],
+            'no3n_no3': self._constants['c_no3n_no3'],
             'nh3n_nh3': self._constants['c_nh3n_nh3'],
             'non_no': self._constants['c_non_no']
         }

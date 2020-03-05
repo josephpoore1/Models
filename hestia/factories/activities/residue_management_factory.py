@@ -36,7 +36,9 @@ class ResidueManagementFactory(ModelFactory):
         crop_residue.burnt_percent = self._get_burnt_share(record)
         crop_residue.removed = self._get_removed_share(record)
         crop_residue.total = self._get_residue_total(record)
+
         instance.residue = crop_residue
+        instance.method = record['management_type']
 
     def _get_residue_total(self, record):
         residue_n = self._references.get_residue_est_from_dm_yield()

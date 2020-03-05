@@ -107,6 +107,7 @@ DATA_MAPPING = dict(
         'List_FAO_Countries':'fao_countries',
         'List_FAO_Countries_H': 'fao_countries_h',
         'List_Climate_N2ON':'climate_n2o_n',
+        'List_Climate_NOxN':'climate_nox_n',
         'List_IPCC_Crops_N2ON':'ipcc_crops_n2o_n',
         'List_Climate_Zone':'climate_zone',
         'List_IPCC_Crops_H':'ipcc_crops',

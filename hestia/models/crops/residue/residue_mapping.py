@@ -15,6 +15,7 @@ MODEL_MAPPING=dict(
         'OF': 'yield_dm',
         'OH': 'yield_mkt',
         'MI': 'crop_name',
-        'I': 'country'
+        'I': 'country',
+        'OT':'management_type'
         }
 )

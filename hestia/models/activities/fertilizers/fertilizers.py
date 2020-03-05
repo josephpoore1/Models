@@ -3,6 +3,7 @@ from hestia.models.activities.fertilizers.organic.organic_fertilizer import Orga
 from hestia.models.activities.fertilizers.excreta.excreta import Excreta
 import numpy as np
 
+
 class Fertilizers:
     organic: OrganicFertilizer
     synthetic: SyntheticFertilizer

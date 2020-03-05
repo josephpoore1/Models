@@ -26,7 +26,3 @@ class DataClient:
         json_reader = JsonReader(lookup_data_source)
         data = json_reader.read(**columns)
         return data
-
-    def get_data_series(self, key):
-        raise NotImplementedError()
-

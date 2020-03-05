@@ -1,5 +1,4 @@
 from hestia.models.farmed_crop import FarmedCrop
-from hestia.models.coefficients.conversions import Conversions
 from hestia.models.references.repository import ReferencesRepository
 import numpy as np
 
@@ -15,8 +14,10 @@ class NH3Emission:
         self._references = references_repository
 
     def calculate_for(self, crop: FarmedCrop):
-        instance = NH3Emission(self._references)
-
+        self.calculate_residue_burn(crop)
+        self.calculate_excreta(crop)
+        self.calculate_organic(crop)
+        self.calculate_residue(crop)
         self.calculate_synthetic(crop)
 
     def calculate_synthetic(self, crop: FarmedCrop):
@@ -46,7 +47,6 @@ class NH3Emission:
             0.38 * residue_shares.loc['n_content_ag'] * 1000 -5.44, 0
         ) / 100 * residue_shares.loc['n_content_ag'] * crop.activities.residue_management.crop_residue.above_ground_remaining \
                * atomic_weight_conversions['nh3n_nh3']
-
 
     def calculate_residue_burn(self, crop: FarmedCrop):
         res_burn = self._references.get_res_burn_emissions()
