@@ -30,19 +30,28 @@ class ReferencesRepository(DataClient):
         climate_zones = self._lists['climate_zone']
         return pd.DataFrame((n2o_n,nox_n), index= climate_zones)
 
+    def _filter_None(self, items):
+        return list(filter(lambda i: i is not None, items))
+
     def get_residue_est_from_dm_yield(self):
         names = self._lists['residue_crop_names']
-        slope = self._lists['residue_slope']
-        intercept = self._lists['residue_intercept']
-        n_content_ag = self._lists['residue_n_content_ag']
-        ratio_ag_to_bg = self._lists['residue_ratio_ag_to_bg']
-        n_content_bg = self._lists['residue_n_content_bg']
-        combustion = self._lists['residue_combustion']
+        names.remove('Crops')
 
-        return pd.DataFrame(
-            data=(slope, intercept, n_content_ag, n_content_bg, combustion, ratio_ag_to_bg),
-            columns=('slope', 'intercept', 'n_content_ag', 'n_content_bg', 'combustion', 'ratio_ag_to_bg'),
-            index=names)
+        slope = self._filter_None(self._lists['residue_slope'])
+        intercept = self._filter_None(self._lists['residue_intercept'])
+        n_content_ag = self._filter_None(self._lists['residue_n_content_ag'])
+        ratio_ag_to_bg = self._filter_None(self._lists['residue_ratio_ag_to_bg'])
+        n_content_bg = self._filter_None(self._lists['residue_n_content_bg'])
+        combustion = self._filter_None(self._lists['residue_combustion'])
+
+        return pd.DataFrame(data= {
+            'crop': pd.Series(names),
+            'slope': pd.Series(slope),
+            'intercept': pd.Series(intercept),
+            'n_content_ag' : pd.Series(n_content_ag),
+            'n_content_bg': pd.Series(n_content_bg),
+            'ratio_ag_to_bg': pd.Series(ratio_ag_to_bg),
+            'combustion': pd.Series(combustion)}).set_index('crop')
 
     def get_n_loss_factors(self):
         return {

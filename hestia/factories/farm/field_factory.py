@@ -3,6 +3,8 @@ from hestia.models.farm.field_mapping import MODEL_MAPPING
 from hestia.factories.model_factory import ModelFactory
 from hestia.factories.farm.land_factory import LandFactory
 
+import numpy as np
+
 
 class FieldFactory(ModelFactory):
     def __init__(self, land_factory: LandFactory):
@@ -29,8 +31,9 @@ class FieldFactory(ModelFactory):
 
         data_table = self._create_table(data_frame, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
+        self._gapfill(data_table)
         return data_table.loc[key]
 
     def _gapfill(self, data_fame):
-        pass
+        data_fame.replace('-', np.NAN, inplace=True)
 

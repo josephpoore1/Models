@@ -2,6 +2,8 @@ from hestia.factories.model_factory import ModelFactory
 from hestia.models.activities.tillage_management import TillageManagement
 from hestia.models.activities.irrigation.irrigation_mapping import MODEL_MAPPING
 
+import numpy as np
+
 
 class LandManagementFactory(ModelFactory):
     def __init__(self):
@@ -14,14 +16,15 @@ class LandManagementFactory(ModelFactory):
 
         data_table = self._create_table(data, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
-        # use data_table to get gapfills
+        self._gapfill(data_table)
         return data_table.loc[key]
 
     def _gapfill(self, data_fame):
-        pass
+        data_fame.replace('-', np.NAN, inplace=True)
 
     def create(self, key):
         record = self._get_record(key)
-        irrigation = TillageManagement()
+        instance = TillageManagement()
+        instance.method = record['method']
 
-        return irrigation
+        return instance

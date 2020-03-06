@@ -17,7 +17,6 @@ class CropFactory(ModelFactory):
 
     def create(self, key):
         crop = Crop()
-        crop.characteristics=self._crop_characteristics_factory.create(key)
-        crop.composition=self._crop_composition_factory.create(key)
-        # crop.productivity=self._crop_productivity_factory.create(crop.characteristics)
+        crop.characteristics= self._crop_characteristics_factory.create(key)
+        crop.composition= self._crop_composition_factory.create(key)
         return crop

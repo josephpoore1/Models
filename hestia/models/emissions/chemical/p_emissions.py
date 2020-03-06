@@ -30,8 +30,8 @@ class PhosphorusEmissions:
         self.calculate_p_to_water(self.Pe, self.Pd, self.Pg, self.Pr)
 
     def calculate_r(self, crop: FarmedCrop):
-        if crop.field.land.weather.winter_type_corr is None or crop.field.land.weather.precipitation is None or crop.activities.irrigation.applied_amount is None:
-            self.R = None
+        if np.isnan(crop.field.land.weather.winter_type_corr) or np.isnan(crop.field.land.weather.precipitation) or np.isnan(crop.activities.irrigation.applied_amount):
+            self.R = np.NAN
             # and log warning here
         else:
             if (crop.field.land.weather.winter_type_corr * crop.activities.irrigation.applied_amount / 10 + crop.field.land.weather.precipitation) > 850:
@@ -64,7 +64,7 @@ class PhosphorusEmissions:
         self.Pr = \
             (0 if crop.field.land.location.slope < 0.03 else 1) * \
             (1 + 0.2/80 * crop.activities.fertilizing.synthetic.p + 0.7/80 *crop.activities.fertilizing.organic.p *
-             (0 if crop.activities.fertilizing.organic.n_composition.liquid_or_slurry is None else crop.activities.fertilizing.organic.n_composition.liquid_or_slurry) +
+             (0 if np.isnan(crop.activities.fertilizing.organic.n_composition.liquid_or_slurry) else crop.activities.fertilizing.organic.n_composition.liquid_or_slurry) +
             0.4/80 * (crop.activities.fertilizing.organic.p * sum(crop.activities.fertilizing.organic.n_composition.to_series()) + crop.activities.fertilizing.excreta.p))
 
     def calculate_Pd(self, crop: FarmedCrop):
@@ -72,7 +72,7 @@ class PhosphorusEmissions:
                   (1 +
                    (0 if crop.activities.fertilizing.organic.p == 0
                     else (0.2 / 80 * crop.activities.fertilizing.organic.p *
-                          (0 if crop.activities.fertilizing.organic.n_composition.liquid_or_slurry is None else crop.activities.fertilizing.organic.n_composition.liquid_or_slurry)))) * \
+                          (0 if np.isnan(crop.activities.fertilizing.organic.n_composition.liquid_or_slurry) else crop.activities.fertilizing.organic.n_composition.liquid_or_slurry)))) * \
                   (6 if crop.field.land.soil.drainage_class > 3 else 0)
 
     def calculate_Pg(self, crop: FarmedCrop):
@@ -80,7 +80,7 @@ class PhosphorusEmissions:
                   (1 +
                    (0 if crop.activities.fertilizing.organic.p == 0
                     else (0.2 / 80 * crop.activities.fertilizing.organic.p *
-                          (0 if crop.activities.fertilizing.organic.n_composition.liquid_or_slurry is None else crop.activities.fertilizing.organic.n_composition.liquid_or_slurry)))) * \
+                          (0 if np.isnan(crop.activities.fertilizing.organic.n_composition.liquid_or_slurry) else crop.activities.fertilizing.organic.n_composition.liquid_or_slurry)))) * \
                   (0 if crop.field.land.soil.drainage_class > 3 else 1)
 
 

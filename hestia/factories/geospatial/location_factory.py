@@ -3,6 +3,7 @@ from hestia.models.geospatial.location_mapping import MODEL_MAPPING
 from hestia.factories.model_factory import ModelFactory
 from hestia.factories.geospatial.position_factory import PositionFactory
 
+import numpy as np
 
 class LocationFactory(ModelFactory):
     '''Creates location instances from different data sources'''
@@ -29,10 +30,11 @@ class LocationFactory(ModelFactory):
 
         data_table = self._create_table(df, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
+        self._gapfill(data_table)
         return data_table.loc[key]
 
     def _gapfill(self, data_fame):
-        pass
+        data_fame.replace('-', np.NAN, inplace=True)
 
     def _map(self, instance, data_row):
         return super()._map(instance, data_row, MODEL_MAPPING['column_names'].values())

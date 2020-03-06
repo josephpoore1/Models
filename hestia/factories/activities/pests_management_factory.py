@@ -2,6 +2,8 @@ from hestia.factories.model_factory import ModelFactory
 from hestia.models.activities.pesticides.pesticide_management import PesticideManagement, Pesticide
 from hestia.models.activities.pesticides.pesticide_management_mapping import MODEL_MAPPING
 
+import numpy as np
+
 
 class PestsManagementFactory(ModelFactory):
     def __init__(self):
@@ -14,11 +16,11 @@ class PestsManagementFactory(ModelFactory):
 
         data_table = self._create_table(data, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
-        # use data_table to get gapfills
+        self._gapfill(data_table)
         return data_table.loc[key]
 
     def _gapfill(self, data_fame):
-        pass
+        data_fame.replace('-', np.NAN, inplace=True)
 
     def create(self, key):
         record = self._get_record(key)

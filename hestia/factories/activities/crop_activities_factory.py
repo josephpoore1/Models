@@ -2,6 +2,8 @@ from hestia.factories.model_factory import ModelFactory
 from hestia.models.activities.farm_activities import FarmActivities
 from hestia.models.activities.farm_activities_mapping import MODEL_MAPPING
 
+import numpy as np
+
 
 class CropActivitiesFactory(ModelFactory):
     def __init__(self, fertilizing_factory, pests_mgmt_factory,
@@ -15,7 +17,6 @@ class CropActivitiesFactory(ModelFactory):
         self._crop_processing_factory = crop_processing_factory
         self._irrigation_factory = irrigation_factory
 
-
     def _get_record(self, key):
         data = self._data_frame
         if data is None:
@@ -23,13 +24,12 @@ class CropActivitiesFactory(ModelFactory):
 
         data_table = self._create_table(data, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
-        # use data_table to get gapfills
+        self._gapfill(data_table)
         return data_table.loc[key]
-
 
     def _gapfill(self, data_fame):
         '''Implement this ig you need to gapfill missing data'''
-        pass
+        data_fame.replace('-', np.NAN, inplace=True)
 
     def create(self, key):
         activities_data = self._get_record(key)
@@ -48,9 +48,6 @@ class CropActivitiesFactory(ModelFactory):
         self._set_crop_processing(instance, key)
 
         return instance
-
-    def _map(self):
-        pass
 
     def _set_fertilizing(self, instance, key):
         instance.fertilizing = self._fertilizing_factory.create(key)

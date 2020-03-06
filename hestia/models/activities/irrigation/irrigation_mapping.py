@@ -6,7 +6,7 @@ MODEL_MAPPING=dict(
     id_key='id',
     column_names={
         'AQ': 'id',
-        'NR': 'type',
+        'OT': 'type',
         'NS': 'amount_applied',
         'NU': 'energy_fuel',
         'NT': 'energy_electr'

@@ -3,6 +3,8 @@ from hestia.models.farm.machinery.machinery_mapping import MODEL_MAPPING
 from hestia.models.measures.energy import Energy
 from hestia.factories.model_factory import ModelFactory
 
+import numpy as np
+
 
 class MachineryFactory(ModelFactory):
     def __init__(self):
@@ -20,6 +22,7 @@ class MachineryFactory(ModelFactory):
 
         data_table = self._create_table(data_frame, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
+        self._gapfill(data_table)
         return data_table.loc[key]
 
     def _map(self, instance: Machinery, data):
@@ -29,4 +32,4 @@ class MachineryFactory(ModelFactory):
         return instance
 
     def _gapfill(self, data_fame):
-        pass
+        data_fame.replace('-', np.NAN, inplace=True)

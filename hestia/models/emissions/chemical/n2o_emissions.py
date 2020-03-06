@@ -33,13 +33,13 @@ class N2OEmissions:
         self.calculate_residue_burn(farmed_crop.activities.residue_management.crop_residue.burnt_kg)
 
     def calculate_synthetic(self, fertilizers: Fertilizers, n2o_total):
-        self.synthetic = n2o_total * fertilizers.synthetic.n / sum(fertilizers.synthetic.n, fertilizers.organic.n, fertilizers.excreta.n)
+        self.synthetic = n2o_total * fertilizers.synthetic.n / fertilizers.total_n()
 
     def calculate_organic(self, fertilizers: Fertilizers, n2o_total):
-        self.organic = n2o_total * fertilizers.organic.n / sum(fertilizers.synthetic.n, fertilizers.organic.n, fertilizers.excreta.n)
+        self.organic = n2o_total * fertilizers.organic.n / fertilizers.total_n()
 
     def calculate_excreta(self, fertilizers: Fertilizers, n2o_total):
-        self.excreta = n2o_total * fertilizers.excreta.n / sum(fertilizers.synthetic.n, fertilizers.organic.n, fertilizers.excreta.n)
+        self.excreta = n2o_total * fertilizers.excreta.n / fertilizers.total_n()
 
     def calculate_residue(self, residue_amount):
         residue_emissions = self._references.get_n2o_from_residue()

@@ -2,6 +2,8 @@ from hestia.models.geospatial.eco_climate_zone import EcoClimateZone
 from hestia.models.geospatial.eco_climate_zone_mapping import MODEL_MAPPING
 from hestia.factories.model_factory import ModelFactory
 
+import numpy as np
+
 
 class EcoClimateZoneFactory(ModelFactory):
     '''Creates country instances from differrent data sources'''
@@ -21,10 +23,11 @@ class EcoClimateZoneFactory(ModelFactory):
 
         data_table = self._create_table(df, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
+        self._gapfill(data_table)
         return data_table.loc[key]
 
     def _gapfill(self, data_fame):
-        pass
+        data_fame.replace('-', np.NAN, inplace=True)
 
     def _map(self, instance: EcoClimateZone, data_row ):
         return super()._map(instance, data_row, MODEL_MAPPING['column_names'].values())

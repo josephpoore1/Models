@@ -2,6 +2,9 @@ from hestia.factories.model_factory import ModelFactory
 from hestia.models.activities.residue_management import ResidueManagement, CropResidue
 from hestia.models.crops.residue.residue_mapping import MODEL_MAPPING
 
+import numpy as np
+import pandas as pd
+
 
 class ResidueManagementFactory(ModelFactory):
     def __init__(self):
@@ -15,10 +18,11 @@ class ResidueManagementFactory(ModelFactory):
         data_table = self._create_table(data, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
         # use data_table to get gapfills
+        self._gapfill(data_table)
         return data_table.loc[key]
 
     def _gapfill(self, data_fame):
-        pass
+        data_fame.replace('-', np.NAN, inplace=True)
 
     def create(self, key):
         record = self._get_record(key)
@@ -42,7 +46,7 @@ class ResidueManagementFactory(ModelFactory):
 
     def _get_residue_total(self, record):
         residue_n = self._references.get_residue_est_from_dm_yield()
-        if record['total'] is None:
+        if np.isnan(record['total']):
             return self._get_ag_remaining(record) * residue_n['ag'] + self._get_bg_remaining(record) * residue_n['bg']
         else:
             return record['total']
@@ -50,8 +54,8 @@ class ResidueManagementFactory(ModelFactory):
     def _get_ag_remaining(self, record):
         estimation_from_dm_yield = self._references.get_residue_est_from_dm_yield()
 
-        if record['above_ground_remaining'] is None:
-            yield_dm = record['yield_dm'] if record['yield_dm'] is not None else record['yield_mkt'] * 0.85
+        if np.isnan(record['above_ground_remaining']):
+            yield_dm = record['yield_dm'] if pd.notna(record['yield_dm']) else record['yield_mkt'] * 0.85
             removed_share = self._get_removed_share(record)
             burnt_share = self._get_burnt_share(record)
             slope = estimation_from_dm_yield.loc[record['crop_name'] ,'slope']
@@ -65,8 +69,8 @@ class ResidueManagementFactory(ModelFactory):
     def _get_bg_remaining(self, record):
         estimation_from_dm_yield = self._references.get_residue_est_from_dm_yield()
 
-        if record['below_ground_remaining'] is None:
-            yield_dm = record['yield_dm'] if record['yield_dm'] is not None else record['yield_mkt'] * 0.85
+        if  np.isnan(record['below_ground_remaining']):
+            yield_dm = record['yield_dm'] if pd.notna(record['yield_dm']) else record['yield_mkt'] * 0.85
 
             slope = estimation_from_dm_yield.loc[record['crop_name'] ,'slope']
             intercept = estimation_from_dm_yield.loc[record['crop_name', 'intercept']]
@@ -77,7 +81,7 @@ class ResidueManagementFactory(ModelFactory):
             return record['below_ground_remaining']
 
     def _get_burnt_share(self, record):
-        if record['burnt_percent'] is not None:
+        if pd.notna(record['burnt_percent']):
             return record['burnt_percent']
 
         default_residue_burn = self._references.get_residue_burn_share()
@@ -87,7 +91,7 @@ class ResidueManagementFactory(ModelFactory):
                * estimation_from_dm_yield.loc[record['crop_name'], 'combustion']
 
     def _get_removed_share(self, record):
-        if record['removed'] is not None:
+        if pd.notna(record['removed']):
             return record['removed']
 
         default_residue_removal = self._references.get_residue_removed_share()
@@ -96,8 +100,8 @@ class ResidueManagementFactory(ModelFactory):
     def _get_burnt_dm(self, record):
         estimation_from_dm_yield = self._references.get_residue_est_from_dm_yield()
 
-        if record['burnt_kg'] is None:
-            yield_dm = record['yield_dm'] if record['yield_dm'] is not None else record['yield_mkt'] * 0.85
+        if np.isnan(record['burnt_kg']):
+            yield_dm = record['yield_dm'] if pd.notna(record['yield_dm']) else record['yield_mkt'] * 0.85
             removed_share = self._get_removed_share(record)
             burnt_share = self._get_burnt_share(record)
             slope = estimation_from_dm_yield.loc[record['crop_name'] ,'slope']

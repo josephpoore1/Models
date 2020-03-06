@@ -3,7 +3,7 @@ from hestia.models.references.repository import ReferencesRepository
 import numpy as np
 
 
-class NH3Emission:
+class NH3Emissions:
     synthetic: float
     organic: float
     excreta: float

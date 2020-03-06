@@ -4,8 +4,10 @@ from hestia.models.geospatial.weather import Weather
 from hestia.models.geospatial.soil import Soil
 from hestia.models.references.repository import ReferencesRepository
 
+import pandas as pd
+import numpy as np
 
-class NO3Emission:
+class NO3Emissions:
     synthetic: float
     organic: float
     excreta: float
@@ -15,7 +17,7 @@ class NO3Emission:
     def __init__(self, references_repository: ReferencesRepository):
         self._references = references_repository
 
-    def calculcate_for(self, crop: FarmedCrop):
+    def calculate_for(self, crop: FarmedCrop):
         self.calculate_total(crop)
 
         self.calclulate_excreta(crop, self.total)
@@ -43,7 +45,7 @@ class NO3Emission:
 
     def _get_leaching_factor(self, crop: CropCharacteristics, soil: Soil, weather: Weather):
         leaching = self._references.get_no3_leaching()
-        if crop.field.land.sp == 'A' or crop.field.land.sp is None:
+        if crop.field.land.sp == 'A' or np.isnan(crop.field.land.sp):
             return leaching['other']
         elif (crop.crop_root_depth > 1.3 or soil.clay > 0.50 or weather.precipitation < 500 ) and (crop.crop_root_depth > 0.4 or soil.sand < 0.85 or weather.precipitation < 1300):
             return leaching['low']

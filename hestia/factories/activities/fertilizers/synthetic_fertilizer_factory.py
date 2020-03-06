@@ -3,6 +3,8 @@ from hestia.models.activities.fertilizers.synthetic.synthetic_fertilizer import 
 from hestia.models.activities.fertilizers.synthetic.synthetic_fertilizer_composition import SyntheticFertilizerComposition
 from hestia.models.activities.fertilizers.synthetic.synthetic_fertilizer_mapping import MODEL_MAPPING
 
+import numpy as np
+
 
 class SyntheticFertilizerFactory(ModelFactory):
     def __init__(self):
@@ -15,10 +17,11 @@ class SyntheticFertilizerFactory(ModelFactory):
 
         data_table = self._create_table(data_frame, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
+        self._gapfill(data_table)
         return data_table.loc[key]
 
     def _gapfill(self, data_fame):
-        pass
+        data_fame.replace('-', np.NAN, inplace=True)
 
     def create(self, key):
         record = self._get_record(key)

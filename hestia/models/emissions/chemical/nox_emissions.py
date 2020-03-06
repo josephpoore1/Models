@@ -3,7 +3,7 @@ from hestia.models.references.repository import ReferencesRepository
 import numpy as np
 
 
-class NOxEmission:
+class NOxEmissions:
     synthetic: float
     organic: float
     excreta: float
@@ -30,10 +30,10 @@ class NOxEmission:
 
         n_total = self._get_total_n(crop)
 
-        if crop.field.land.sp == 'A' or crop.field.land.sp is None:
+        if crop.field.land.sp == 'A' or np.isnan(crop.field.land.sp):
             self.total = default_regional_nox.loc[crop.field.land.country] * n_total
         else:
-            self.total =  min(
+            self.total = min(
                 0.25 * n_total,
                 np.exp(
                     -0.451 + 0.0061 * n_total +
