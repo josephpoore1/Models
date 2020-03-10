@@ -3,6 +3,17 @@ from hestia.models.farm.plant_infrastructure_mapping import MODEL_MAPPING
 from hestia.factories.model_factory import ModelFactory
 
 import numpy as np
+import pandas as pd
+
+numeric_columns=['glass',
+                 'plastic',
+                 'rockwool',
+                 'steel',
+                 'aluminium',
+                 'iron',
+                 'concrete',
+                 'wood']
+
 
 class PlantInfrastructureFactory(ModelFactory):
     def __init__(self):
@@ -19,8 +30,8 @@ class PlantInfrastructureFactory(ModelFactory):
             data_frame = self._get_data_frame(MODEL_MAPPING)
 
         data_table = self._create_table(data_frame, MODEL_MAPPING['column_names'],
-                                        MODEL_MAPPING['id_key'])
-        self._gapfill(data_table)
+                                        MODEL_MAPPING['id_key'],
+                                        numeric_columns)
         return data_table.loc[key]
 
     def _map(self, instance: PlantInfrastructure, data):
@@ -34,5 +45,5 @@ class PlantInfrastructureFactory(ModelFactory):
         instance.steel = data['steel']
         instance.wood = data['wood']
 
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
+    def _gapfill(self, data_frame):
+        pass

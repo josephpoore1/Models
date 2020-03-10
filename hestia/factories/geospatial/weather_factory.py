@@ -2,7 +2,11 @@ from hestia.models.geospatial.weather import Weather
 from hestia.models.geospatial.weather_mapping import MODEL_MAPPING
 from hestia.factories.model_factory import ModelFactory
 
-import numpy as np
+numeric_columns=['pet',
+                 'winter_type_corr',
+                 'avg_temp',
+                 'precip',
+                 'eco_clim_zone']
 
 
 class WeatherFactory(ModelFactory):
@@ -15,7 +19,13 @@ class WeatherFactory(ModelFactory):
         data = self._get_record(key)
         instance = Weather()
 
-        return self._map(instance, data)
+        instance.precipitation = data['precip']
+        instance.winter_type_corr=data['winter_type_corr']
+        instance.pet=data['pet']
+        instance.average_temperature=data['avg_temp']
+        instance.eco_clim_zone=data['eco_clim_zone']
+
+        return instance
 
     def _get_record(self, key):
         df = self._data_frame
@@ -23,12 +33,9 @@ class WeatherFactory(ModelFactory):
             df = self._get_data_frame(MODEL_MAPPING)
 
         data_table = self._create_table(df, MODEL_MAPPING['column_names'],
-                                        MODEL_MAPPING['id_key'])
-        self._gapfill(data_table)
+                                        MODEL_MAPPING['id_key'],
+                                        numeric_columns)
         return data_table.loc[key]
 
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
-
-    def _map(self, instance, data_row):
-        return super()._map(instance, data_row, MODEL_MAPPING['column_names'].values())
+    def _gapfill(self, data_frame):
+        pass

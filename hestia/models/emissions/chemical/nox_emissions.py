@@ -39,12 +39,12 @@ class NOxEmissions:
                     -0.451 + 0.0061 * n_total +
                     (0 if crop.field.land.soil.nitrogen / 1000 < 0.005 else
                     -1.0211 if crop.field.land.soil.nitrogen <= 0.02 else 0.7892) +
-                    climate_emissions[crop.field.land.weather.eco_clim_zone.value, 'nox_n']
+                    climate_emissions[crop.field.land.weather.eco_clim_zone, 'nox_n']
                 ) - np.exp(
                     -0.451 +
                     (0 if crop.field.land.soil.nitrogen / 1000 < 0.005 else
                      -1.0211 if crop.field.land.soil.nitrogen <= 0.02 else 0.7892) +
-                    climate_emissions[crop.field.land.weather.eco_clim_zone.value, 'nox_n']
+                    climate_emissions[crop.field.land.weather.eco_clim_zone, 'nox_n']
                 )
             ) * atomic_conversions['non_no']
 

@@ -8,8 +8,8 @@ class CropCompositionFactory(ModelFactory):
     def _get_record(self, key):
         pass
 
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
+    def _gapfill(self, data_frame):
+        pass
 
     def __init__(self):
         super().__init__()

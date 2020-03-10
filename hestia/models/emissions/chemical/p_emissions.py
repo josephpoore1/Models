@@ -50,12 +50,13 @@ class PhosphorusEmissions:
         c2_country_factors = self._references.get_p_loss_c2_factors_ctry()
         c2_tillage_factors = self._references.get_p_loos_c2_factors_tillage()
         p_correction = self._references.get_correction_for_practice_factor()
+        p_correction_index = p_correction.loc[lambda df: df['Min'] > crop.field.land.location.slope, 'Pcorr'].index[0]
 
         self.A = r * crop.field.land.soil.erodibility * crop.field.land.location.slope_len * \
                  c1_crop_factors.loc[crop.crop.characteristics.crop_name] * \
                  c2_country_factors.loc[crop.field.land.country] if (crop.crop.characteristics.crop_name == 'Pasture' or crop.activities.residue_management.method == '-') else \
             c2_tillage_factors.loc[crop.activities.residue_management.method] * \
-            p * p_correction.loc[lambda df: df['Pcorr'] == crop.field.land.location.slope, 'Pcorr']
+            p * p_correction.loc[p_correction_index, 'Pcorr']
 
     def calculate_Pe(self, crop: FarmedCrop, a):
         self.Pe = a * crop.field.land.soil.loss_to_auqatics * 2 * crop.field.land.soil.phosphorus

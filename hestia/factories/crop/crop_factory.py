@@ -6,7 +6,7 @@ class CropFactory(ModelFactory):
     def _get_record(self, key):
         pass
 
-    def _gapfill(self, data_fame):
+    def _gapfill(self, data_frame):
         pass
 
     def __init__(self, crop_characteristics_factory, crop_composition_factory, crop_prouctivity_factory):

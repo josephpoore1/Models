@@ -5,6 +5,14 @@ from hestia.models.crops.residue.residue_mapping import MODEL_MAPPING
 import numpy as np
 import pandas as pd
 
+numeric_cols = ['total',
+                'removed',
+                'burnt_percent',
+                'burnt_kg',
+                'above_ground_remaining',
+                'below_ground_remaining',
+                'yield_dm', 'yield_mkt']
+
 
 class ResidueManagementFactory(ModelFactory):
     def __init__(self):
@@ -16,13 +24,14 @@ class ResidueManagementFactory(ModelFactory):
             data = self._get_data_frame(MODEL_MAPPING)
 
         data_table = self._create_table(data, MODEL_MAPPING['column_names'],
-                                        MODEL_MAPPING['id_key'])
+                                        MODEL_MAPPING['id_key'],
+                                        numeric_cols)
+
         # use data_table to get gapfills
-        self._gapfill(data_table)
         return data_table.loc[key]
 
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
+    def _gapfill(self, data_frame):
+        pass
 
     def create(self, key):
         record = self._get_record(key)
@@ -41,13 +50,13 @@ class ResidueManagementFactory(ModelFactory):
         crop_residue.removed = self._get_removed_share(record)
         crop_residue.total = self._get_residue_total(record)
 
-        instance.residue = crop_residue
+        instance.crop_residue = crop_residue
         instance.method = record['management_type']
 
     def _get_residue_total(self, record):
         residue_n = self._references.get_residue_est_from_dm_yield()
         if np.isnan(record['total']):
-            return self._get_ag_remaining(record) * residue_n['ag'] + self._get_bg_remaining(record) * residue_n['bg']
+            return self._get_ag_remaining(record) * residue_n['n_content_ag'] + self._get_bg_remaining(record) * residue_n['n_content_bg']
         else:
             return record['total']
 
@@ -59,7 +68,7 @@ class ResidueManagementFactory(ModelFactory):
             removed_share = self._get_removed_share(record)
             burnt_share = self._get_burnt_share(record)
             slope = estimation_from_dm_yield.loc[record['crop_name'] ,'slope']
-            intercept = estimation_from_dm_yield.loc[record['crop_name', 'intercept']]
+            intercept = estimation_from_dm_yield.loc[record['crop_name'], 'intercept']
 
             return (yield_dm * slope + intercept * 1000) * (1-removed_share) * (1-burnt_share)
 
@@ -73,8 +82,8 @@ class ResidueManagementFactory(ModelFactory):
             yield_dm = record['yield_dm'] if pd.notna(record['yield_dm']) else record['yield_mkt'] * 0.85
 
             slope = estimation_from_dm_yield.loc[record['crop_name'] ,'slope']
-            intercept = estimation_from_dm_yield.loc[record['crop_name', 'intercept']]
-            ratio = estimation_from_dm_yield.loc[record['crop_name', 'ratio']]
+            intercept = estimation_from_dm_yield.loc[record['crop_name'], 'intercept']
+            ratio = estimation_from_dm_yield.loc[record['crop_name'], 'ratio_ag_to_bg']
 
             return (yield_dm * slope + intercept * 1000) * ratio
         else:
@@ -105,6 +114,8 @@ class ResidueManagementFactory(ModelFactory):
             removed_share = self._get_removed_share(record)
             burnt_share = self._get_burnt_share(record)
             slope = estimation_from_dm_yield.loc[record['crop_name'] ,'slope']
-            intercept = estimation_from_dm_yield.loc[record['crop_name', 'intercept']]
+            intercept = estimation_from_dm_yield.loc[record['crop_name'], 'intercept']
 
             return (yield_dm * slope + intercept * 1000) * (1-removed_share) * burnt_share
+        else:
+            return record['burnt_kg']

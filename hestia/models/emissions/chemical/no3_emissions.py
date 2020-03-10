@@ -2,10 +2,12 @@ from hestia.models.farmed_crop import FarmedCrop
 from hestia.models.crops.crop_characteristics import CropCharacteristics
 from hestia.models.geospatial.weather import Weather
 from hestia.models.geospatial.soil import Soil
+from hestia.models.farm.land import Land
 from hestia.models.references.repository import ReferencesRepository
 
-import pandas as pd
+
 import numpy as np
+
 
 class NO3Emissions:
     synthetic: float
@@ -39,13 +41,16 @@ class NO3Emissions:
 
     def calculate_total(self, crop: FarmedCrop):
         atomic_weights = self._references.get_atomic_weight_conversions()
-        self.total = self._get_total_n() \
-                     * self._get_leaching_factor(crop.crop.characteristics, crop.field.land.soil, crop.field.land.weather) \
+        self.total = self._get_total_n(crop) \
+                     * self._get_leaching_factor(crop=crop.crop.characteristics,
+                                                 soil=crop.field.land.soil,
+                                                 weather=crop.field.land.weather,
+                                                 land=crop.field.land) \
                      * atomic_weights['no3n_no3']
 
-    def _get_leaching_factor(self, crop: CropCharacteristics, soil: Soil, weather: Weather):
+    def _get_leaching_factor(self, crop: CropCharacteristics, soil: Soil, weather: Weather, land: Land):
         leaching = self._references.get_no3_leaching()
-        if crop.field.land.sp == 'A' or np.isnan(crop.field.land.sp):
+        if land.sp == 'A' or land.sp == '-':
             return leaching['other']
         elif (crop.crop_root_depth > 1.3 or soil.clay > 0.50 or weather.precipitation < 500 ) and (crop.crop_root_depth > 0.4 or soil.sand < 0.85 or weather.precipitation < 1300):
             return leaching['low']

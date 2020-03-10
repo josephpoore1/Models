@@ -8,7 +8,7 @@ MODEL_MAPPING=dict(
         'AQ': 'id',
         'I': 'country',
         'MI': 'crop_name',
-        'PC':' slope',
+        'PC': 'slope',
         'PB': 'slope_len',
         'OX': 'sand',
         'OW': 'clay',

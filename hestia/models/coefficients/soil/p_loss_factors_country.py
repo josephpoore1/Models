@@ -13,7 +13,7 @@ class PhosphorusLossFactorsCountry(ModelFactory):
     def _get_record(self, key):
         pass
 
-    def _gapfill(self, data_fame):
+    def _gapfill(self, data_frame):
         pass
 
     def create(self, key):

@@ -4,6 +4,10 @@ from hestia.factories.model_factory import ModelFactory
 from hestia.factories.geospatial.position_factory import PositionFactory
 
 import numpy as np
+import pandas as pd
+
+numeric_columns = ['slope', 'slope_length']
+
 
 class LocationFactory(ModelFactory):
     '''Creates location instances from different data sources'''
@@ -15,9 +19,11 @@ class LocationFactory(ModelFactory):
     def create(self, key):
         data = self._get_record(key)
         instance = Location()
+        instance.slope = data['slope']
+        instance.slope_len = data['slope_length']
         self._set_position(instance, key)
 
-        return self._map(instance, data)
+        return instance
 
     def _set_position(self, instance, key):
         position = self._position_factory.create(key)
@@ -29,12 +35,9 @@ class LocationFactory(ModelFactory):
             df = self._get_data_frame(MODEL_MAPPING)
 
         data_table = self._create_table(df, MODEL_MAPPING['column_names'],
-                                        MODEL_MAPPING['id_key'])
-        self._gapfill(data_table)
+                                        MODEL_MAPPING['id_key'],
+                                        numeric_columns)
         return data_table.loc[key]
 
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
-
-    def _map(self, instance, data_row):
-        return super()._map(instance, data_row, MODEL_MAPPING['column_names'].values())
+    def _gapfill(self, data_frame):
+        pass

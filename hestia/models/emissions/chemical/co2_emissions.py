@@ -10,7 +10,7 @@ class CO2Emissions:
         self._references = references_repository
 
     def calculate_for(self, crop: FarmedCrop):
-        instance = CO2Emissions()
+        instance = CO2Emissions(self._references)
         self._calculate_lime(crop)
         self._calculate_urea(crop)
 

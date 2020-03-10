@@ -2,7 +2,17 @@ from hestia.factories.model_factory import ModelFactory
 from hestia.models.geospatial.soil import Soil
 from hestia.models.geospatial.soil_mapping import MODEL_MAPPING
 
-import numpy as np
+numeric_columns = ['slope',
+                   'slope_len',
+                   'sand',
+                   'clay',
+                   'phos',
+                   'phH2O',
+                   'org_carbon',
+                   'loss_to_aquatics',
+                   'nitrogen',
+                   'erodibility',
+                   'drainage']
 
 
 class SoilFactory(ModelFactory):
@@ -20,12 +30,12 @@ class SoilFactory(ModelFactory):
             data_frame = self._get_data_frame(MODEL_MAPPING)
 
         data_table = self._create_table(data_frame, MODEL_MAPPING['column_names'],
-                                        MODEL_MAPPING['id_key'])
-        self._gapfill(data_table)
+                                        MODEL_MAPPING['id_key'],
+                                        numeric_columns)
         return data_table.loc[key]
 
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
+    def _gapfill(self, data_frame):
+        pass
 
     def _map(self, instance: Soil, data: dict):
         '''TODO: do tuple unpacking?'''

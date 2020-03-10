@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from hestia.data_client.data_client import DataClient
 from hestia.models.references.repository import ReferencesRepository
 import pandas as pd
+import numpy as np
 
 
 class ModelFactory(ABC):
@@ -15,9 +16,9 @@ class ModelFactory(ABC):
         pass
 
     @abstractmethod
-    def _gapfill(self, data_fame):
+    def _gapfill(self, data_frame):
         '''Replaces missing (NaN) values with a proposed ones'''
-        return data_fame
+        return data_frame
 
     @abstractmethod
     def create(self, key):
@@ -32,8 +33,11 @@ class ModelFactory(ABC):
     def _get_observations_data(self, from_file, delimiter, columns=None):
         return self._get_observations_data(from_file,delimiter)
 
-    def _create_table(self, data_frame, columns, index_key):
+    def _create_table(self, data_frame, columns, index_key, numeric_columns=[]):
         data_frame = data_frame.rename(columns=columns).set_index(index_key, drop=False)
+        data_frame[numeric_columns] = data_frame[numeric_columns].apply(pd.to_numeric, errors='coerce')
+        data_frame.replace('-', np.NAN, inplace=True)
+
         return pd.DataFrame(data_frame)
 
     def _get_lookup_data(self, lookup_data_source, columns):

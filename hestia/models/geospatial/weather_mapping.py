@@ -7,9 +7,9 @@ MODEL_MAPPING=dict(
     column_names={
         'AQ': 'id',
         'MI': 'crop_name',
-        'PJ':' pet',
+        'PJ': 'pet',
         'PH': 'winter_type_corr',
-        'PI': 'av_temp',
+        'PI': 'avg_temp',
         'PG': 'precip',
         'PK': 'eco_clim_zone',
         }

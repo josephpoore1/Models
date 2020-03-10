@@ -10,7 +10,7 @@ class CH4Emissions:
         self._references = references_repository
 
     def calculate_for(self, crop: FarmedCrop):
-        instance = CH4Emissions()
+        instance = CH4Emissions(self._references)
         instance.residue_burn = self._get_residue_burn(crop.activities.residue_management.crop_residue)
         return instance
 

@@ -28,14 +28,19 @@ class ReferencesRepository(DataClient):
         n2o_n = self._lists['climate_n2o_n']
         nox_n = self._lists['climate_nox_n']
         climate_zones = self._lists['climate_zone']
-        return pd.DataFrame((n2o_n,nox_n), index= climate_zones)
+        return pd.DataFrame(data=
+                            { 'n2o_n': pd.Series(n2o_n),
+                              'nox_n': pd.Series(nox_n),
+                              'climate': pd.Series(climate_zones)
+                              }).set_index('climate')
 
     def _filter_None(self, items):
         return list(filter(lambda i: i is not None, items))
 
     def get_residue_est_from_dm_yield(self):
         names = self._lists['residue_crop_names']
-        names.remove('Crops')
+        if 'Crops' in names:
+            names.remove('Crops')
 
         slope = self._filter_None(self._lists['residue_slope'])
         intercept = self._filter_None(self._lists['residue_intercept'])
@@ -99,7 +104,9 @@ class ReferencesRepository(DataClient):
         factors = self._lists['correction_for_practice_factor']
         slope = self._lists['correction_for_practice_factor_slope']
 
-        return pd.DataFrame((factors, slope), index=slope, columns=('Pcorr', 'Min'))
+        frame = pd.DataFrame((factors, slope)).transpose()
+        frame.columns = ('Pcorr', 'Min')
+        return frame
 
     def get_emissions_from_diesel(self):
         columns = ('production', 'combustion')
@@ -196,7 +203,7 @@ class ReferencesRepository(DataClient):
         return pd.DataFrame(data=table, columns=fertilizers, index=temperatures)
 
     def get_p_loss_c2_factors_ctry(self):
-        country = self._lists['fao_countries']
+        country = self._lists['fao_countries_h']
         c2_factor = self._lists['p_loss_c2_ctry_factor']
 
         return pd.Series(c2_factor, index=country)
@@ -209,22 +216,15 @@ class ReferencesRepository(DataClient):
 
     def get_residue_burn_share(self):
         removed = self._lists['residue_burn_share']
-        crop_name = self._lists['residue_removed_share_crops']
-        country = self._lists['residue_removed_share_countries']
+        crop_name = self._lists['residue_share_crops']
+        country = self._lists['residue_share_countries']
 
         return pd.DataFrame(data=removed,columns=country, index=crop_name)
 
     def get_residue_removed_share(self):
         removed = self._lists['residue_removed_share']
-        crop_name = self._lists['residue_removed_share_crops']
-        country = self._lists['residue_removed_share_countries']
-
-        return pd.DataFrame(data=removed, columns=country, index=crop_name)
-
-    def get_residue_burnt_share(self):
-        removed = self._lists['residue_removed_share']
-        crop_name = self._lists['residue_removed_share_crops']
-        country = self._lists['residue_removed_share_countries']
+        crop_name = self._lists['residue_share_crops']
+        country = self._lists['residue_share_countries']
 
         return pd.DataFrame(data=removed, columns=country, index=crop_name)
 
@@ -238,7 +238,7 @@ class ReferencesRepository(DataClient):
 
     def get_synth_fert_use(self):
         return {
-            'global': self._constants['synth_fert_use_global']
+            'global': self._lists['synth_fert_use_global']
         }
 
     def get_gwp(self):

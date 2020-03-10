@@ -3,6 +3,14 @@ from hestia.models.farm.farm_infrastructure_mapping import MODEL_MAPPING
 from hestia.factories.model_factory import ModelFactory
 
 import numpy as np
+import pandas as pd
+
+numeric_columns = ['energy_electricity',
+                   'energy_disel',
+                   'amount',
+                   'hours',
+                   'plastic']
+
 
 class FarmInfrastructureFactory(ModelFactory):
     def __init__(self, machinery_factory, plant_factory):
@@ -24,8 +32,8 @@ class FarmInfrastructureFactory(ModelFactory):
             data_frame = self._get_data_frame(MODEL_MAPPING)
 
         data_table = self._create_table(data_frame, MODEL_MAPPING['column_names'],
-                                        MODEL_MAPPING['id_key'])
-        self._gapfill(data_table)
+                                        MODEL_MAPPING['id_key'],
+                                        numeric_columns)
         return data_table.loc[key]
 
     def _map(self, instance: FarmInfrastructure, data):
@@ -34,8 +42,8 @@ class FarmInfrastructureFactory(ModelFactory):
         instance.plastic = data['plastic']
         return instance
 
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
+    def _gapfill(self, data_frame):
+        pass
 
     def _set_plant_infrastructure(self, instance: FarmInfrastructure, plant_infst_key):
         plant_infrastructure = self._plant_factory.create(plant_infst_key)

@@ -21,7 +21,7 @@ class ResidueEstimationFromDMYield(ModelFactory):
                                         MODEL_MAPPING['id_key'])
         self._map(instance, data_table.loc[key], MODEL_MAPPING['column_names'].values())
 
-    def _gapfill(self, data_fame):
+    def _gapfill(self, data_frame):
         pass
 
     def create(self, key):

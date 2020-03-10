@@ -2,15 +2,15 @@ from hestia.models.crops.crop_characteristics import CropCharacteristics
 from hestia.models.crops.crop_characteristics_mapping import MODEL_MAPPING
 from hestia.factories.model_factory import ModelFactory
 
-import numpy as np
+numeric_columns = ['crop_root_depth']
 
 
 class CropCharacteristicsFactory(ModelFactory):
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
-
     def __init__(self):
         super().__init__()
+
+    def _gapfill(self, data_frame):
+        pass
 
     def create(self,key):
         data_row = self._get_record(key)
@@ -28,7 +28,8 @@ class CropCharacteristicsFactory(ModelFactory):
             df = self._get_data_frame(MODEL_MAPPING)
 
         data_table = self._create_table(df, MODEL_MAPPING['column_names'],
-                                        MODEL_MAPPING['id_key'])
+                                        MODEL_MAPPING['id_key'],
+                                        numeric_columns)
         self._gapfill(data_table)
         return data_table.loc[key]
 

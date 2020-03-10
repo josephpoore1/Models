@@ -2,8 +2,6 @@ from hestia.models.geospatial.position import Position
 from hestia.models.geospatial.position_mapping import MODEL_MAPPING
 from hestia.factories.model_factory import ModelFactory
 
-import numpy as np
-
 
 class PositionFactory(ModelFactory):
     '''Creates country instances from differrent data sources'''
@@ -24,11 +22,10 @@ class PositionFactory(ModelFactory):
 
         data_table = self._create_table(df, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
-        self._gapfill(data_table)
         return data_table.loc[key]
 
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
+    def _gapfill(self, data_frame):
+        pass
 
     def _map(self, instance, data_row):
         return super()._map(instance, data_row, MODEL_MAPPING['column_names'].values())

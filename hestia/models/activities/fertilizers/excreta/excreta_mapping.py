@@ -7,6 +7,7 @@ MODEL_MAPPING=dict(
     column_names={
         'AQ': 'id',
         'ND': 'n_amount',
+        'NH':'p_amount',
         'NE': 'tan_amount',
         'MJ': 'animal'
         }

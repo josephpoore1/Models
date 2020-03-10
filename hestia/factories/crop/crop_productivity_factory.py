@@ -9,8 +9,8 @@ class CropProductivityFactory(ModelFactory):
     def __init__(self):
         super().__init__()
 
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
+    def _gapfill(self, data_frame):
+        pass
 
     def create(self, key):
         instance=CropProductivity()
@@ -33,5 +33,4 @@ class CropProductivityFactory(ModelFactory):
 
         data_table = self._create_table(df, MODEL_MAPPING['column_names'],
                                         MODEL_MAPPING['id_key'])
-        self._gapfill(data_table)
         return data_table.loc[key]

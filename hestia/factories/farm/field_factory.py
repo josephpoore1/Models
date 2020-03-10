@@ -14,7 +14,7 @@ class FieldFactory(ModelFactory):
     def create(self, key):
         data = self._get_record(key)
         instance = Field()
-        self._set_land(data, key)
+        self._set_land(instance, key)
         return self._map(data, instance)
 
     def _set_land(self, instance, key):
@@ -34,6 +34,6 @@ class FieldFactory(ModelFactory):
         self._gapfill(data_table)
         return data_table.loc[key]
 
-    def _gapfill(self, data_fame):
-        data_fame.replace('-', np.NAN, inplace=True)
+    def _gapfill(self, data_frame):
+        pass
 
