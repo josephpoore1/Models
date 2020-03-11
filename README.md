@@ -7,104 +7,94 @@ This library is semnticaly structured to a set of modules that represent diferre
 ## Farm observations
 Contains models that semanticaly grop properties that describe farming activities, inputs, environment and crop characteristics. The 
 model used has the following structure:
-├───activities
-│   ├───fertilizers
-│   │   ├───excreta
-│   │   │   └───__pycache__
-│   │   ├───organic
-│   │   │   └───__pycache__
-│   │   ├───synthetic
-│   │   │   └───__pycache__
-│   │   └───__pycache__
-│   ├───irrigation
-│   │   └───__pycache__
-│   ├───pesticides
-│   │   └───__pycache__
-│   ├───processing
-│   │   └───__pycache__
-│   └───__pycache__
-├───coefficients
-│   ├───conversions
-│   ├───crop
-│   ├───residue
-│   ├───residue_burn
-│   ├───soil
-│   ├───weather
-│   └───__pycache__
-├───crops
-│   ├───residue
-│   │   └───__pycache__
-│   └───__pycache__
-├───emissions
-│   ├───activities
-│   ├───chemical
-│   │   └───__pycache__
-│   ├───environment
-│   └───sources
-├───farm
-│   ├───irrigation
-│   ├───machinery
-│   │   └───__pycache__
-│   └───__pycache__
-├───geospatial
-│   └───__pycache__
-├───measures
-│   ├───irrigation_types
-│   └───__pycache__
-├───references
-│   └───__pycache__
-└───__pycache__
 
-
+```bash
 farmed crop:
-  |--seed
-  |--farming_period
-  |--Field
-     |--Land
-       |--area
-       |--sp
-       |--country
-       |--geography
-       |--Location
-       |  |--slope
-       |  |--slope_length
-       |  |--Position
-       |     |--lat
-       |     |--lon
-       |--soil
-          |--phH20
-          |--clay
-         - sand
-         - nitrogen
-         - phosphorus
-         - org_carbon
-         - drainage_class
-         - loss_to_auqatics
-         - erodibility
-       - weather
-         - precipitation
-         - average_temperature
-         - winter_type_corr
-         - pet
-         - eco_clim_zone
-           - name
-           - value
-           - c_class
-           - c_nox_N
-           - c_n2o_N
-  - infrastructure
-     - 
-  - activities
-     - fertilizing
-     - irrigation
-     - pest_management
-     - residue_management
-     - land_management
-     - crop_processing
-  - crop_yield
-     - dry_matter
-     - marketable
-  - 
+  ├─── seed
+  ├─── farming_period
+  ├─── CropYield
+  │     ├─── dry_matter
+  │     └─── marketable
+  ├─── Field
+  │     └─── Land 
+  │          ├─── area
+  │          ├─── sp
+  │          ├─── country
+  │          ├─── geography
+  │          └─── Location
+  │               ├─── slope
+  │               ├─── slope_length
+  │               ├─── Position
+  │               │     ├─── lat
+  │               │     └─── lon
+  │               ├─── Soil
+  │               │     ├─── phH2O
+  │               │     ├─── clay
+  │               │     ├─── sand
+  │               │     ├─── nitrogen
+  │               │     ├─── phosphorus
+  │               │     ├─── org_carbon
+  │               │     ├─── drainage_class
+  │               │     ├─── loss_to_auqatics
+  │               │     └─── erodibility
+  │               └─── Weather
+  │                      ├─── precipitation
+  │                      ├─── average_temperature
+  │                      ├─── winter_type_corr
+  │                      ├─── pet                        
+  │                      └─── EcoClimZone
+  │                           ├─── name
+  │                           ├─── value
+  │                           ├─── c_class
+  │                           ├─── c_nox_N                             
+  │                           └─── c_n2o_N
+  ├─── Activities
+  │      ├─── Fertilizing
+  │      │    ├─── lime
+  │      │    ├─── dolomite
+  │      │    ├─── OrganicFertilizer
+  │      │    │    ├─── n
+  │      │    │    ├─── p
+  │      │    │    ├─── k
+  │      │    │    ├─── tan
+  │      │    │    ├─── n_composition
+  │      │    │    │     ├─── liquid_or_slurry
+  │      │    │    │     ├─── solid
+  │      │    │    │     ├─── compost
+  │      │    │    │     └─── green_manure
+  │      │    │    │
+  │      │    │    └─── tan_composition
+  │      │    │          ├─── liquid_or_slurry
+  │      │    │          ├─── solid
+  │      │    │          ├─── compost
+  │      │    │          └─── green_manure
+  │      │    │
+  │      │    ├─── SyntheticFertilizer
+  │      │    │    ├─── n
+  │      │    │    ├─── p
+  │      │    │    ├─── k
+  │      │    │    └─── composition
+  │      │    │         ├─── UREA_UAS
+  │      │    │         ├─── AS
+  │      │    │         ├─── UAN_SOLU
+  │      │    │         ├─── AN_ACl_NP_KN_NPK
+  │      │    │         ├─── CAN
+  │      │    │         ├─── AnhA_AquaA
+  │      │    │         └─── AP_DAP_MAP
+  │      │    │
+  │      │    └─── Excreta
+  │      │        ├─── n
+  │      │        ├─── tan
+  │      │        ├─── p
+  │      │        └─── animal
+  │      │
+  │      ├─── Irrigation
+  │      ├─── PestManagement
+  │      ├─── ResidueManagement
+  │      ├─── LandManagement
+  │      └─── CropProcessing
+  └─── Infrastructure
+```
 
 ## References
 This includes scalar values, vectors and tables that represent standardisationvalues that can be used to calculate emissions.
