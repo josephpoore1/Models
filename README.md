@@ -4,10 +4,114 @@ This library is semnticaly structured to a set of modules that represent diferre
 
 # Models
 
+## Farm observations
+Contains models that semanticaly grop properties that describe farming activities, inputs, environment and crop characteristics. The 
+model used has the following structure:
+├───activities
+│   ├───fertilizers
+│   │   ├───excreta
+│   │   │   └───__pycache__
+│   │   ├───organic
+│   │   │   └───__pycache__
+│   │   ├───synthetic
+│   │   │   └───__pycache__
+│   │   └───__pycache__
+│   ├───irrigation
+│   │   └───__pycache__
+│   ├───pesticides
+│   │   └───__pycache__
+│   ├───processing
+│   │   └───__pycache__
+│   └───__pycache__
+├───coefficients
+│   ├───conversions
+│   ├───crop
+│   ├───residue
+│   ├───residue_burn
+│   ├───soil
+│   ├───weather
+│   └───__pycache__
+├───crops
+│   ├───residue
+│   │   └───__pycache__
+│   └───__pycache__
+├───emissions
+│   ├───activities
+│   ├───chemical
+│   │   └───__pycache__
+│   ├───environment
+│   └───sources
+├───farm
+│   ├───irrigation
+│   ├───machinery
+│   │   └───__pycache__
+│   └───__pycache__
+├───geospatial
+│   └───__pycache__
+├───measures
+│   ├───irrigation_types
+│   └───__pycache__
+├───references
+│   └───__pycache__
+└───__pycache__
 
-### Emisssions:
 
-All emissions are being divided into groups
+farmed crop:
+  |--seed
+  |--farming_period
+  |--Field
+     |--Land
+       |--area
+       |--sp
+       |--country
+       |--geography
+       |--Location
+       |  |--slope
+       |  |--slope_length
+       |  |--Position
+       |     |--lat
+       |     |--lon
+       |--soil
+          |--phH20
+          |--clay
+         - sand
+         - nitrogen
+         - phosphorus
+         - org_carbon
+         - drainage_class
+         - loss_to_auqatics
+         - erodibility
+       - weather
+         - precipitation
+         - average_temperature
+         - winter_type_corr
+         - pet
+         - eco_clim_zone
+           - name
+           - value
+           - c_class
+           - c_nox_N
+           - c_n2o_N
+  - infrastructure
+     - 
+  - activities
+     - fertilizing
+     - irrigation
+     - pest_management
+     - residue_management
+     - land_management
+     - crop_processing
+  - crop_yield
+     - dry_matter
+     - marketable
+  - 
+
+## References
+This includes scalar values, vectors and tables that represent standardisationvalues that can be used to calculate emissions.
+
+
+## Emisssions:
+All emissions are being divided into 2 groups chemical emissions  and activity emissions
 
 #### Chemical (chemical compounds):
 Lists emissions as chemical compounds that are being created by a specific activity during a cycle, these include:
@@ -21,6 +125,15 @@ Lists emissions as chemical compounds that are being created by a specific activ
  - urea, lime (applies to CO2 emissions)
  - total
 
+Each of emission models exposes a single public method that can be used to calculate it's properties based on the lifecyle model:
+
+    crop = FarmedCrop()
+    ch4_emissions = Ch4Emissions(references)
+    
+    ch4_emissions.calculate_for(crop)
+    
+    print(ch4.residue_burn)
+    # 0.342
 
 #### Activities:
 Lists the emission models that are generated in a cycle, and reflects an ipact of a farming activity these include:
@@ -56,8 +169,9 @@ property (column) map that defines what values to load and how to assign it:
         }  
 )
 
-#Data clients:
+# Data clients:
 Set of modules that implement logic for loading data from file or directory storages 
+
 
 # Factories (model builders):
 A list of modules for constructing semantic objects from lca data. Each factory is a module that constructs a corresponding model
