@@ -89,11 +89,61 @@ farmed crop:
   │      │        └─── animal
   │      │
   │      ├─── Irrigation
+  │      │    ├─── type
+  │      │    ├─── applied_amount
+  │      │    └─── Energy
+  │      │          ├─── fuel
+  │      │          └─── electricity
+  │      │ 
   │      ├─── PestManagement
+  │      │    ├─── amount
+  │      │    ├─── Pest1
+  │      │    │      ├─── amount
+  │      │    │      └─── name
+  │      │    ├─── Pest2
+  │      │    │      ├─── amount
+  │      │    │      └─── name
+  │      │    └─── Pest
+  │      │          ├─── amount
+  │      │          └─── name
+  |      |
   │      ├─── ResidueManagement
+  │      │    ├─── method
+  │      │    └─── CropResidue
+  │      │          ├─── removed
+  │      │          ├─── burnt_percent
+  │      │          ├─── burnt_kg
+  │      │          ├─── above_ground_remaining
+  │      │          ├─── below_ground_remaining
+  │      │          └─── total
+  |      |
   │      ├─── LandManagement
+  │      │    ├─── cultivation_duration
+  │      │    ├─── crop_allocation
+  │      │    └─── fallow_allocation
+  |      |
   │      └─── CropProcessing
+  │           └─── DryingGrading 
+  │                 ├─── fuel
+  │                 └─── electricity
+  |
   └─── Infrastructure
+        ├─── plastic
+        ├─── PlantInfrastructure
+        |     ├─── type
+        |     ├─── glass
+        |     ├─── plastic
+        |     ├─── rockwool
+        |     ├─── steel
+        |     ├─── aluminium
+        |     ├─── iron
+        |     ├─── concrete
+        |     └─── wood
+        └─── Machinery
+              ├─── amount
+              ├─── hours
+              └─── Energy
+  
 ```
 
 ## References
