@@ -74,23 +74,23 @@ DATA_MAPPING = dict(
         'Acid_Inputs_Wood': 'acid_wood',
         # Emissions from fertilizers production
         # ghg
-        'GHG_Inputs_SynthN': 'ghg_from_synth_fert',
-        'GHG_Inputs_SynthPhos': 'ghg_from_synth_phos',
-        'GHG_Inputs_SynthPot': 'ghg_from_synth_pot',
-        'GHG_Inputs_Lime': 'ghg_from_lime',
-        'GHG_Inputs_Pesticide': 'ghg_from_pesticide',
+        'GHG_Inputs_SynthN': 'ghg_from_synth_fert_avg',
+        'GHG_Inputs_SynthPhos': 'ghg_from_synth_phos_avg',
+        'GHG_Inputs_SynthPot': 'ghg_from_synth_pot_avg',
+        'GHG_Inputs_Lime': 'ghg_from_lime_avg',
+        'GHG_Inputs_Pesticide': 'ghg_from_pesticide_avg',
         # acidification
-        'Acid_Inputs_SynthN': 'acid_from_synth_fert',
-        'Acid_Inputs_SynthPhos': 'acid_from_synth_phos',
-        'Acid_Inputs_SynthPot': 'acid_from_synth_pot',
-        'Acid_Inputs_Lime': 'acid_from_lime',
-        'Acid_Inputs_Pesticide': 'acid_from_pesticide',
+        'Acid_Inputs_SynthN': 'acid_from_synth_fert_avg',
+        'Acid_Inputs_SynthPhos': 'acid_from_synth_phos_avg',
+        'Acid_Inputs_SynthPot': 'acid_from_synth_pot_avg',
+        'Acid_Inputs_Lime': 'acid_from_lime_avg',
+        'Acid_Inputs_Pesticide': 'acid_from_pesticide_avg',
         # eutrophication
-        'Eutr_Inputs_SynthN': 'eutr_from_synth_fert',
-        'Eutr_Inputs_SynthPhos': 'eutr_from_synth_phos',
-        'Eutr_Inputs_SynthPot': 'eutr_from_synth_pot',
-        'Eutr_Inputs_Lime': 'eutr_from_lime',
-        'Eutr_Inputs_Pesticide': 'eutr_from_pesticide'
+        'Eutr_Inputs_SynthN': 'eutr_from_synth_fert_avg',
+        'Eutr_Inputs_SynthPhos': 'eutr_from_synth_phos_avg',
+        'Eutr_Inputs_SynthPot': 'eutr_from_synth_pot_avg',
+        'Eutr_Inputs_Lime': 'eutr_from_lime_avg',
+        'Eutr_Inputs_Pesticide': 'eutr_from_pesticide_avg'
     },
 
     lists = {

@@ -7,6 +7,7 @@ from hestia.models.emissions.chemical.n2o_emissions import N2OEmissions
 from hestia.models.emissions.chemical.ch4_emissions import CH4Emissions
 from hestia.models.emissions.chemical.co2_emissions import CO2Emissions
 from hestia.models.emissions.chemical.p_emissions import PhosphorusEmissions
+from hestia.models.emissions.activities.fertilizers_pesticide_and_other_inputs import FertilizerPesticideAndOtherInputsEmissions
 
 from hestia.models.references.repository import ReferencesRepository
 
@@ -22,7 +23,10 @@ if __name__ == '__main__':
     no3 = NO3Emissions(references)
     ch4 = CH4Emissions(references)
     co2 = CO2Emissions(references)
+    fert_pest_other_inputs_emissions = FertilizerPesticideAndOtherInputsEmissions(references)
+
     p_emissions = PhosphorusEmissions(references)
+    fert_pest_other_inputs_emissions.calculate_for(crop)
 
     p_emissions.calculate_for(crop)
     nh3.calculate_for(crop)

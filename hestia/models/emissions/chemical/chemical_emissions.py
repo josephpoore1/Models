@@ -8,6 +8,7 @@ from hestia.models.emissions.chemical.p_emissions import PhosphorusEmissions
 from hestia.models.farmed_crop import FarmedCrop
 from hestia.models.references.repository import ReferencesRepository
 
+
 class ChemicalEmissions:
     ch4: CH4Emissions
     co2: CO2Emissions

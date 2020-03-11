@@ -6,6 +6,7 @@ MODEL_MAPPING=dict(
     id_key='id',
     column_names={
         'AQ': 'id',
+        'NX': 'total_amount',
         'NY': 'pest1_name',
         'NZ': 'pest1_amount',
         'OA': 'pest2_name',

@@ -24,6 +24,12 @@ class ReferencesRepository(DataClient):
             'urea' :  self._constants['synth_fert_nutrient_urea_n'],
         }
 
+    def get_n2o_from_fertilizers_and_residue(self):
+         return  {
+             'nh3nnoxn' : self._constants['c_nh3nnoxn_n2o'],
+             'no3n': self._constants['c_no3n_n2o']
+         }
+
     def get_climate_zone_emissions(self):
         n2o_n = self._lists['climate_n2o_n']
         nox_n = self._lists['climate_nox_n']
@@ -246,6 +252,50 @@ class ReferencesRepository(DataClient):
             'n2o': self._constants['gwp_n2o'],
             'ch4': self._constants['gwp_ch4']
         }
+
+    def get_average_eutrophication_inputs(self):
+        return {
+            'synthetic_fertilizer': self._constants['eutr_from_synth_fert_avg'],
+            'synthetic_phosprorus': self._constants['eutr_from_synth_phos_avg'],
+            'potassium': self._constants['eutr_from_synth_pot_avg'],
+            'lime': self._constants['eutr_from_lime_avg'],
+            'pesticide': self._constants['eutr_from_pesticide_avg']
+        }
+
+    def get_average_acidification_inputs(self):
+        return {
+            'synthetic_fertilizer': self._constants['acid_from_synth_fert_avg'],
+            'synthetic_phosprorus': self._constants['acid_from_synth_phos_avg'],
+            'potassium': self._constants['acid_from_synth_pot_avg'],
+            'lime': self._constants['acid_from_lime_avg'],
+            'pesticide': self._constants['acid_from_pesticide_avg']
+        }
+
+    def get_average_ghg_inputs(self):
+        return {
+            'synthetic_fertilizer': self._constants['ghg_from_synth_fert_avg'],
+            'synthetic_phosprorus': self._constants['ghg_from_synth_phos_avg'],
+            'potassium': self._constants['ghg_from_synth_pot_avg'],
+            'lime': self._constants['ghg_from_lime_avg'],
+            'pesticide': self._constants['ghg_from_pesticide_avg']
+        }
+
+    def get_average_acid_inputs(self):
+        return {
+            'synthetic_fertilizer': self._constants['ghg_from_synth_fert_avg'],
+            'synthetic_phosprorus': self._constants['ghg_from_synth_phos_avg'],
+            'potassium': self._constants['ghg_from_synth_pot_avg'],
+            'lime': self._constants['ghg_from_lime_avg'],
+            'pesticide': self._constants['ghg_from_pesticide_avg']
+        }
+
+    def get_synth_n_emissions(self):
+        return {
+            'eutr': self._lists['eutr_from_synth_fert'],
+            'gwp': self._lists['gwp_from_synth_fert'],
+            'acid': self._lists['acid_from_synth_fert']
+        }
+
 
     def get_atomic_weight_conversions(self):
         return{
